@@ -449,7 +449,17 @@ class DataModel extends CI_Model
 						return false;
 					}
 				}
-
+				public function adminEmailCheck($email)
+				{
+						$this->db->where('username',$email);
+						$query = $this->db->get('admin');
+						if ($query->num_rows() > 0){
+							return true;
+							}
+							else{
+								return false;
+							}
+				}
 		public function getCategory($prod_id=null)
 			{
 				$this->db->select('*');
@@ -608,7 +618,7 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				//print_r($result); die;
 				if($count > 0){
-					$userdetails = array("ID"=>$result[0]['ID'],'loggedIn'=>true,'type'=>'Admin');
+					$userdetails = array("ID"=>$result[0]['ID'],'loggedIn'=>true,'type'=>'Staff');
 					$this->session->set_userdata($userdetails);
 				}else{
 					$userdetails = array("ID"=>'','loggedIn'=>false, 'type'=>'');

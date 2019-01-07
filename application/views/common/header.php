@@ -1,6 +1,7 @@
 <!doctype html>
 <?php $Loginid = $this->session->userdata('ID');?>
- <?php if (!empty($Loginid)){ ?>
+<?php //print_r($this->session); ?>
+<?php if (!empty($Loginid)){ ?>
 <html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
@@ -29,8 +30,6 @@
 
 </head>
 <body>
-
-
         <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
@@ -43,79 +42,22 @@
                 <a class="navbar-brand" href="./"><img src="<?php echo base_url('images/logonisroch.png'); ?>" alt="Logo"></a>
                 <a class="navbar-brand hidden" href="./"><img src="<?php echo base_url('images/logonisroch.png'); ?>" alt="Logo"></a>
             </div>
-
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="<?php echo base_url('AdminPanel/Dasboard'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
-                    <li>
-                                  <a href="<?php echo base_url('TodayWork'); ?>"> <i class="menu-icon fa fa-laptop"></i>Today Work</a>
-
-                              </li>
-					<li>
-                        <a href="<?php echo base_url('Distributor'); ?>"> <i class="menu-icon fa fa-laptop"></i>Create Distributor</a>
-
-                    </li>
-                    <li>
-                                  <a href="<?php echo base_url('Distributor/Listing'); ?>"> <i class="menu-icon fa fa-laptop"></i>View Distributor</a>
-
-                              </li>
-
-				<!--<li>
-                        <a href="<?php echo base_url('Distributor/Listing'); ?>"> <i class="menu-icon fa fa-laptop"></i>Distributor List</a>
-
-                    </li>-->
-                    <!--<li>
-                        <a href="<?php echo base_url('Product/'); ?>"> <i class="menu-icon fa fa-laptop"></i>Product Entry</a>
-
-                    </li>
-					<li>
-                        <a href="<?php echo base_url('Inventory/Ledger'); ?>"> <i class="menu-icon ti-email"></i>Ledger </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('Product/Listing'); ?>"> <i class="menu-icon fa fa-table"></i>View Product</a>
-
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('Inventory/'); ?>"> <i class="menu-icon ti-email"></i>Inventory </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('Billing'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-bar-chart"></i>Billing</a>
-
-                    </li>
-					<li>
-                        <a href="<?php echo base_url('Billing/InvoiceView'); ?>"> <i class="menu-icon fa fa-th"></i>Invoice</a>
-
-                    </li>-->
-
-					<!--<li>
-                        <a href="<?php echo base_url('AdminPanel/CustomerList'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-bar-chart"></i>Customer List</a>
-
-                    </li>-->
-                    <!--<li>
-                        <a href="<?php echo base_url('transport/'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-bar-chart"></i>Create Transport</a>
-
-                    </li>
-
-
-					<li>
-                        <a href="<?php echo base_url('Staff/'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-bar-chart"></i>Create Staff</a>
-
-                    </li>
-                     <li>
-                        <a href="<?php echo base_url('Designation_Controller/'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-bar-chart"></i>Create Designation</a>
-
-                    </li>-->
-
-
-                    <li>
-                        <a href="<?php echo base_url('AdminPanel/logOut'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-area-chart"></i>Logout</a>
-
-                    </li>
-
-
+                    <li data-toggle="collapse" data-target="#todaywork" class="collapsed"><a href="#"> <i class="menu-icon fa fa-laptop"></i>Today Work</a></li>
+                        <ul class="sub-menu collapse" id="todaywork">
+                          <li><a href="#"> <i class="menu-icon fa fa-users"></i>New Meeting</a></li>
+                          <li><a href="#"> <i class="menu-icon fa fa-bus"></i>Visit Dealer</a></li>
+                          <li><a href="#"> <i class="menu-icon fa fa-bus"></i>Visit Farmers</a></li>
+                          <li><a href="#"> <i class="menu-icon fa fa-group"></i>Follow up Meeting</a></li>
+                        </ul>
+					          <li><a href="<?php echo base_url('Distributor'); ?>"> <i class="menu-icon fa fa-laptop"></i>Create Distributor</a></li>
+                    <li><a href="<?php echo base_url('Distributor/Listing'); ?>"> <i class="menu-icon fa fa-laptop"></i>View Distributor</a></li>
+                    <li><a href="<?php echo base_url('AdminPanel/logOut'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-area-chart"></i>Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -124,8 +66,6 @@
     <!-- Left Panel -->
 
     <!-- Right Panel -->
-
-
 
     <!-- Left Panel -->
 
@@ -150,13 +90,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="<?php echo base_url('images/admin.jpg'); ?>" alt="User Avatar">
                         </a>
-
                         <!--<div class="user-menu dropdown-menu">
                                 <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
 

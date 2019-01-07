@@ -18,12 +18,12 @@ class Staff extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	 
+
 	 public function __construct() {
         parent::__construct();
         $this->load->model('Designation_Model');
     }
-	 
+
 	public function index()
 	{
 		$this->load->model('DataModel');
@@ -33,9 +33,9 @@ class Staff extends CI_Controller {
 		$this->load->view('common/header');
 		$this->load->view('staff',$data);
 	}
-	
-	
-	
+
+
+
 	public function SaveStaff()
 	{
 		$this->load->model('DataModel');
@@ -46,18 +46,18 @@ class Staff extends CI_Controller {
 		$data['number'] = $this->input->post('number');
 		$data['address'] = $this->input->post('address');
         $data['designationid'] = $this->input->post('designationid');
-		
+
 		$insert =  $this->db->insert('admin',$data);
 		if($insert)
 		{
 			$message = $this->session->set_flashdata('message', '1 Staff successfully added');
 			redirect(base_url('Staff/'), 'refresh', $message);
-			
+
 		}
-		
+
 	}
-	
-	
+
+
 	public function editStaff($staff_id=null)
 	{
 		$this->load->model('DataModel');
@@ -66,9 +66,9 @@ class Staff extends CI_Controller {
 		$this->load->view('common/header');
 		$this->load->view('editStaff', $data);
 	}
-	
-	
-	
+
+
+
 	public function UpdateStaff($staff_id=null)
 	{
 		$this->load->model('DataModel');
@@ -80,15 +80,15 @@ class Staff extends CI_Controller {
 		$data['password'] = $password;
 		}
 		$data['number'] = $this->input->post('number');
-		
+
 		$update = $this->DataModel->updatestaff($staff_id, $data);
 		if($update){
 			$message = $this->session->set_flashdata('message', 'Updated successfully !');
 			redirect(base_url('Staff'), 'refresh');
 		}
 	}
-	
-	
+
+
 	public function deleteDistributor($dist_id=null)
 	{
 		$this->load->model('DataModel');
@@ -98,7 +98,7 @@ class Staff extends CI_Controller {
 			redirect(base_url('Distributor/Listing'), 'refresh');
 		}
 	}
-	
+
 	public function deleteStaff($staff_id=null)
 	{
 		$this->load->model('DataModel');
@@ -108,9 +108,9 @@ class Staff extends CI_Controller {
 			redirect(base_url('Staff'), 'refresh');
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

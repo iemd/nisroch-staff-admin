@@ -33,9 +33,11 @@
 
 						<td><?php echo $row['created_at']; ?></td>
 						<td><?php echo $row['City']; ?></td>
-            <td>
-              <!--<button name="approve" class="btn btn-success btn-sm" id="approve">Approved</button>-->
+            <td><?php if($row['status'] == 1): ?>
+              <button name="approve" class="btn btn-success btn-sm" id="approve">Approved</button>
+            <?php else: ?>
               <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
+            <?php endif; ?>  
             </td>
                       <td>  <a href="<?php //echo base_url('Inventory/AllLedgerPrint/'.$row['dist_id']); ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>&nbsp;&nbsp;<a href="<?php //echo base_url('Distributor/editDistributor/').$row['dist_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;<a href="<?php //echo base_url('Distributor/deleteDistributor/').$row['dist_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
                       </tr>
