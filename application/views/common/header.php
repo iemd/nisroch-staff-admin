@@ -47,10 +47,10 @@
                     <li class="active">
                         <a href="<?php echo base_url('AdminPanel/Dasboard'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
-                    <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">STAFF (MARKETING)</h3><!-- /.menu-title -->
                     <li data-toggle="collapse" data-target="#todaywork" class="collapsed"><a href="#"> <i class="menu-icon fa fa-laptop"></i>Today Work</a></li>
                         <ul class="sub-menu collapse" id="todaywork">
-                          <li><a href="#"> <i class="menu-icon fa fa-users"></i>New Meeting</a></li>
+                          <li><a href="<?php echo base_url('NewMeeting/'); ?>"><i class="menu-icon fa fa-users"></i>New Meeting</a></li>
                           <li><a href="#"> <i class="menu-icon fa fa-bus"></i>Visit Dealer</a></li>
                           <li><a href="#"> <i class="menu-icon fa fa-bus"></i>Visit Farmers</a></li>
                           <li><a href="#"> <i class="menu-icon fa fa-group"></i>Follow up Meeting</a></li>
