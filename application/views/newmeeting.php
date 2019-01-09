@@ -14,9 +14,9 @@
                 <div class="card-body card-block">
                   <div class="row form-group">
                       <div class="col col-md-3"><label for="text-input" class=" form-control-label">&nbsp;</label></div>
-                      <div class="col-12 col-md-3"><input type="text" id="Date" name="Date" placeholder="Date" class="form-control"></div>
-                      <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" placeholder="Time" class="form-control"></div>
-                      <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" placeholder="Day" class="form-control"></div>
+                      <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
+                      <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('H:i'); ?>" placeholder="Time" class="form-control"></div>
+                      <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name of Person</label></div>
@@ -49,15 +49,20 @@
                       </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Follow Up</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="Followup" name="Followup" placeholder="Follow Up" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" placeholder="Time" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" placeholder="Date" class="form-control"></div>
+                        <div class="col col-md-3">&nbsp;</div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
                           <div class="col-12 col-md-9">
                             <select name="category" id="category" class="form-control" required="">
                                 <option value="">Select</option>
-                                <option value="active">Active</option>
-								                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+								                <option value="Inactive">Inactive</option>
+                                <option value="Not Interested">Not Interested</option>
+                                <option value="In Process<">In Process</option>
+                                <option value="Pending">Pending</option>
                             </select>
                           </div>
                         </div>
