@@ -66,7 +66,7 @@
 							<div class="col-12 col-md-3"><input type="text" id="Destination" name="Destination" placeholder="Enter Destination" class="form-control"></div>
 							<div class="col-12 col-md-3"><input type="text" id="pnumber" name="pnumber" placeholder="Enter PL Number" class="form-control"></div>
                           </div>
-						 
+
 
 
 						  <div class="card-footer" style="background-color:#95ecd4;">
@@ -97,10 +97,10 @@
 
 				  <?php } ?>
 
-    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/popper.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/plugins.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
 
 
 </body>

@@ -4,7 +4,7 @@
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php //echo base_url('distributor/CreateDistibutor/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal"><form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('newmeeting/createmeeting/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
@@ -15,7 +15,7 @@
                   <div class="row form-group">
                       <div class="col col-md-3"><label for="text-input" class=" form-control-label">&nbsp;</label></div>
                       <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
-                      <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('H:i'); ?>" placeholder="Time" class="form-control"></div>
+                      <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
                     </div>
                     <div class="row form-group">
@@ -84,8 +84,31 @@
 	 <?php redirect(base_url('AdminPanel')); ?>
 <?php } ?>
     <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/vendor/jquery-ui.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/vendor/jquery.timepicker.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/plugins.js')?>"></script>
     <script src="<?php echo base_url('assets/js/main.js')?>"></script>
+
+    <script>
+      jQuery(function($){
+        $('#followuptime').timepicker({
+          timeFormat: 'h:mm p',
+          interval: 60,
+          minTime: '10',
+          maxTime: '6:00pm',
+          defaultTime: '11',
+          startTime: '10:00',
+          dynamic: false,
+          dropdown: true,
+          scrollbar: true
+        });
+      });
+    </script>
+    <script>
+    jQuery( function() {
+      jQuery( "#followupdate" ).datepicker( { dateFormat: 'dd-mm-yy' });
+    } );
+</script>
 </body>
 </html>

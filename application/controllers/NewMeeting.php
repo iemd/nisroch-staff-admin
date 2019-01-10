@@ -21,7 +21,15 @@ class NewMeeting extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('common/header');
+		//$this->load->helper('date_helper');
 		$this->load->view('newmeeting');
+	}
+	public function CreateMeeting()
+	{
+		$this->load->view('common/header');
+		echo "hhghg";
+		//$this->load->helper('date_helper');
+		//$this->load->view('newmeeting');
 	}
 
 }
