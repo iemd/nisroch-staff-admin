@@ -260,7 +260,14 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
-
+		public function meetinglist()
+		 {
+					$this->db->select('*');
+					$this->db->from('staff_meeting');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
+		 }
 		public function ledgerprint($bill_id=null)
 			{
 				$this->db->select('*');

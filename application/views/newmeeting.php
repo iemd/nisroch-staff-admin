@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body card-block">
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">&nbsp;</label></div>
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date/Time/Day</label></div>
                       <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
@@ -45,23 +45,25 @@
                       </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Remark</label></div>
-                        <div class="col-12 col-md-9"><input type="number" id="Remark" name="Remark" placeholder="Remark" class="form-control"></div>
+                        <div class="col-12 col-md-9"><input type="text" id="Remark" name="Remark" placeholder="Remark" class="form-control"></div>
                       </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Follow Up</label></div>
-                        <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" placeholder="Time" class="form-control"></div>
-                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" placeholder="Date" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" placeholder="HH:MM" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" placeholder="DD-MM-YYYY" class="form-control"></div>
                         <div class="col col-md-3">&nbsp;</div>
+                        <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
+                        <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
                           <div class="col-12 col-md-9">
-                            <select name="category" id="category" class="form-control" required="">
+                            <select name="status" id="status" class="form-control" required="">
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>
 								                <option value="Inactive">Inactive</option>
                                 <option value="Not Interested">Not Interested</option>
-                                <option value="In Process<">In Process</option>
+                                <option value="In Process">In Process</option>
                                 <option value="Pending">Pending</option>
                             </select>
                           </div>
@@ -90,14 +92,14 @@
     <script src="<?php echo base_url('assets/js/plugins.js')?>"></script>
     <script src="<?php echo base_url('assets/js/main.js')?>"></script>
 
-    <script>
+<script>
       jQuery(function($){
         $('#followuptime').timepicker({
           timeFormat: 'h:mm p',
-          interval: 60,
+          interval: 30,
           minTime: '10',
           maxTime: '6:00pm',
-          defaultTime: '11',
+          //defaultTime: '11',
           startTime: '10:00',
           dynamic: false,
           dropdown: true,
@@ -109,6 +111,28 @@
     jQuery( function() {
       jQuery( "#followupdate" ).datepicker( { dateFormat: 'dd-mm-yy' });
     } );
+</script>
+
+<script>
+    var lat = document.getElementById("latitude");
+    var lng = document.getElementById("longitude");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        lat.value = 0; //Geolocation is not supported by this browser.
+        lng.value = 0; //Geolocation is not supported by this browser.
+      }
+    }
+
+    function showPosition(position) {
+      lat.value = position.coords.latitude;
+      lng.value = position.coords.longitude;
+    }
+    jQuery(function($){
+      getLocation();
+    });
 </script>
 </body>
 </html>
