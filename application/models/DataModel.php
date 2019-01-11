@@ -364,6 +364,24 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
+			public function VisitDealerDetails($staff_id=null)
+				{
+					$this->db->select('*');
+					$this->db->where('created_by', $staff_id);
+					$this->db->from('staff_visit_dealer');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
+				}
+			public function VisitFarmerDetails($staff_id=null)
+				{
+					$this->db->select('*');
+					$this->db->where('created_by', $staff_id);
+					$this->db->from('staff_visit_farmer');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
+				}
 
 		public function editstaff($staff_id=null)
 			{

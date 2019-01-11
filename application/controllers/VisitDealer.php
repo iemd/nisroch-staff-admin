@@ -23,7 +23,9 @@ class VisitDealer extends CI_Controller {
 		$this->load->model('DataModel');
 		$this->load->view('common/header');
 		//$this->load->helper('date_helper');
+		$staff_id = $this->session->userdata('ID');
 		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$data['VisitDealerDetails'] = $this->DataModel->VisitDealerDetails($staff_id);
 		$this->load->view('visitdealer',$data);
 	}
 
@@ -42,7 +44,7 @@ class VisitDealer extends CI_Controller {
 		$insert =  $this->db->insert('staff_visit_dealer',$data);
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 visit dealer successfully created');
+			$message = $this->session->set_flashdata('message', '1 visit successfully created');
 			redirect(base_url('VisitDealer/'), 'refresh', $message);
 
 		}

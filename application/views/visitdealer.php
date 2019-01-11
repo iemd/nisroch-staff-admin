@@ -61,6 +61,53 @@
         </div><!-- .content -->
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+    <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card" style="background-color:#95ecd4;">
+                        <div class="card-header">
+                            <strong class="card-title">Visit Dealer Details</strong>
+                        </div>
+						<?php //echo $this->session->flashdata('message');  ?>
+                        <div class="card-body">
+                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Visit Date</th>
+                        <th>Current NPP</th>
+						             <th>Current NBP</th>
+                        <th>Follow Up Time</th>
+                        <th>Follow Up Date</th>
+						            <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+					<?php foreach($VisitDealerDetails as $row) { ?>
+                      <tr>
+					  <?php //print_r($row);die; ?>
+                        <td><?php echo $row['visit_date']; ?></td>
+                        <td><?php echo $row['currentNpp']; ?></td>
+                        <td><?php echo $row['currentNbp']; ?></td>
+                        <td><?php echo $row['followup_time']; ?></td>
+                        <td><?php echo $row['followup_date']; ?></td>
+
+						  <td><a href="<?php //echo base_url('Staff/editStaff/').$row['ID']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>
+              <a href="<?php //echo base_url('Staff/deleteStaff/').$row['ID']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
+                      </tr>
+					<?php } ?>
+
+                    </tbody>
+                  </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+            </div><!-- .animated -->
+        </div>
 <?php } else { ?>
 	 <?php redirect(base_url('AdminPanel')); ?>
 <?php } ?>
