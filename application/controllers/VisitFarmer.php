@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class NewMeeting extends CI_Controller {
+class VisitFarmer extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,12 +20,14 @@ class NewMeeting extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->model('DataModel');
 		$this->load->view('common/header');
 		//$this->load->helper('date_helper');
-		$this->load->view('newmeeting');
+		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$this->load->view('visitfarmer',$data);
 	}
 
-	public function CreateMeeting()
+	/*public function CreateVisitDealer()
 	{
 		$data['meeting_date'] = date('Y-m-d H:i:s');
 		$data['person_name'] = $this->input->post('nameofperson');
@@ -44,8 +46,8 @@ class NewMeeting extends CI_Controller {
 		$insert =  $this->db->insert('staff_meeting',$data);
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 new Meeting successfully created');
-			redirect(base_url('NewMeeting/'), 'refresh', $message);
+			$message = $this->session->set_flashdata('message', '1 visit dealer successfully created');
+			redirect(base_url('VisitDealer/'), 'refresh', $message);
 
 		}
 
@@ -53,11 +55,27 @@ class NewMeeting extends CI_Controller {
 	public function Listing()
 	{
 		$this->load->model('DataModel');
-		$data['meetinglist'] = $this->DataModel->meetinglist();
+		$data['visitdealerlist'] = $this->DataModel->meetinglist();
 		//print_r($data['meetinglist']);die;
 		$this->load->view('common/header');
-		$this->load->view('meetingList', $data);
-	}
+		$this->load->view('visitdealerList', $data);
+	}*/
+	public function DLimit()
+  {
+		$this->load->model('DataModel');
+		$dist_id = $this->input->post('dist_id');
+		$distlimit = $this->DataModel->distlimit($dist_id);
+		foreach($distlimit as $row){
+		}
+		$nppLimit = $row['currentNpp'];
+		$nbpLimit = $row['currentNbp'];
+
+echo "<div class='col col-md-3'><label for='text-input' class='form-control-label'>NPP Limit | NBP Limit</label></div>
+		  <div class='col col-md-3'><input type='text' id='nppLimit' name='nppLimit' value='$nppLimit' placeholder='Remark' class='form-control'></div>
+			<div class='col col-md-3'><input type='text' id='nbpLimit' name='nbpLimit' value='$nbpLimit' placeholder='Remark' class='form-control'></div>
+			<div class='col col-md-3'><label for='text-input' class='form-control-label'>&nbsp;</label></div>";
+
+}
 
 	/*public function editMeeting($meet_id=null)
 	{

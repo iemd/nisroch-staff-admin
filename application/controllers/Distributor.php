@@ -51,10 +51,10 @@ class Distributor extends CI_Controller {
 	public function Listing()
 	{
 		$this->load->model('DataModel');
-		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$data['StaffDistributorlist'] = $this->DataModel->StaffDistributorlist();
 		//print_r($data['distributorlist']);die;
 		$this->load->view('common/header');
-		$this->load->view('distributorList', $data);
+		$this->load->view('SraffDistributorList', $data);
 	}
 
 	public function editDistributor($dist_id=null)

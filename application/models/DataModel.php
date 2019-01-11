@@ -241,13 +241,21 @@ class DataModel extends CI_Model
 				return $result;
 			}
 
-		public function distributorlist()
+		public function StaffDistributorlist()
 			{
 				$this->db->select('*');
 				$this->db->from('staff_distributor');
 				$query = $this->db->get();
 				$result = $query->result_array();
 				return $result;
+			}
+			public function distributorlist()
+				{
+					$this->db->select('*');
+					$this->db->from('distributor');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
 			}
 
 		public function editdistributor($dist_id=null)
