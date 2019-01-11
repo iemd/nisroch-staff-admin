@@ -4,7 +4,7 @@
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php //echo base_url('newmeeting/createmeeting/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('VisitFarmer/CreateVisitFarmer/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
@@ -119,7 +119,7 @@ jQuery(document).ready(function(){
         var dist_id = jQuery(".abc option:selected").val();
 		//alert(dist_id);
 		jQuery.ajax({
-				url : "<?php echo site_url('VisitDealer/DLimit');?>",
+				url : "<?php echo site_url('VisitFarmer/DLimit');?>",
 				method : "POST",
 				data:'dist_id='+dist_id,
 				success: function(data){

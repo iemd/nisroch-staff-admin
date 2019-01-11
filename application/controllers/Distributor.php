@@ -37,6 +37,8 @@ class Distributor extends CI_Controller {
 		$data['pos'] = $this->input->post('pos');
 		$data['Destination'] = $this->input->post('Destination');
 		$data['pnumber'] = $this->input->post('pnumber');
+		$data['status'] = 0;
+		$data['created_by'] = $this->session->userdata('ID');
 		$insert =  $this->db->insert('staff_distributor',$data);
 		if($insert)
 		{

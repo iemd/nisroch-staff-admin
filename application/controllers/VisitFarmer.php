@@ -27,27 +27,23 @@ class VisitFarmer extends CI_Controller {
 		$this->load->view('visitfarmer',$data);
 	}
 
-	/*public function CreateVisitDealer()
+	public function CreateVisitFarmer()
 	{
-		$data['meeting_date'] = date('Y-m-d H:i:s');
-		$data['person_name'] = $this->input->post('nameofperson');
-		$data['business_name'] = $this->input->post('nameofbusiness');
-		$data['contact'] = $this->input->post('contact');
-		$data['addr_city'] = $this->input->post('City');
-		$data['addr_dist'] = $this->input->post('District');
-		$data['addr_pin'] = $this->input->post('Pincode');
-		$data['concern'] = $this->input->post('Concern');
+		$data['visit_date'] = date('Y-m-d H:i:s');
+		$data['currentNpp'] = $this->input->post('nppLimit');
+		$data['currentNbp'] = $this->input->post('nbpLimit');
 		$data['remark'] = $this->input->post('Remark');
 		$data['followup_time'] = $this->input->post('followuptime');
 		$data['followup_date'] = $this->input->post('followupdate');
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
-		$data['status'] = $this->input->post('status');
-		$insert =  $this->db->insert('staff_meeting',$data);
+		$data['DistributorID'] = $this->input->post('Distributor');
+		$data['created_by'] = $this->session->userdata('ID');
+		$insert =  $this->db->insert('staff_visit_farmer',$data);
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 visit dealer successfully created');
-			redirect(base_url('VisitDealer/'), 'refresh', $message);
+			$message = $this->session->set_flashdata('message', '1 visit farmer successfully created');
+			redirect(base_url('VisitFarmer/'), 'refresh', $message);
 
 		}
 
@@ -59,7 +55,7 @@ class VisitFarmer extends CI_Controller {
 		//print_r($data['meetinglist']);die;
 		$this->load->view('common/header');
 		$this->load->view('visitdealerList', $data);
-	}*/
+	}
 	public function DLimit()
   {
 		$this->load->model('DataModel');
@@ -71,8 +67,8 @@ class VisitFarmer extends CI_Controller {
 		$nbpLimit = $row['currentNbp'];
 
 echo "<div class='col col-md-3'><label for='text-input' class='form-control-label'>NPP Limit | NBP Limit</label></div>
-		  <div class='col col-md-3'><input type='text' id='nppLimit' name='nppLimit' value='$nppLimit' placeholder='Remark' class='form-control'></div>
-			<div class='col col-md-3'><input type='text' id='nbpLimit' name='nbpLimit' value='$nbpLimit' placeholder='Remark' class='form-control'></div>
+		  <div class='col col-md-3'><input type='text' id='nppLimit' name='nppLimit' value='$nppLimit' placeholder='NPP Limit' class='form-control'></div>
+			<div class='col col-md-3'><input type='text' id='nbpLimit' name='nbpLimit' value='$nbpLimit' placeholder='NBP Limit' class='form-control'></div>
 			<div class='col col-md-3'><label for='text-input' class='form-control-label'>&nbsp;</label></div>";
 
 }
