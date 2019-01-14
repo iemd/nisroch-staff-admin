@@ -432,6 +432,15 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
+			public function getProductByType($ptype=null)
+				{
+					$this->db->select('*');
+					$this->db->where('category',$ptype);
+					$this->db->from('products');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
+				}
 
 		public function getinvoice($bill_id=null)
 			{

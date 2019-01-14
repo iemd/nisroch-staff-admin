@@ -60,7 +60,7 @@
                         <!--</ul>-->
 					          <li><a href="<?php echo base_url('Distributor'); ?>"> <i class="menu-icon fa fa-laptop"></i>Create Distributor</a></li>
                     <li><a href="<?php echo base_url('Distributor/Listing'); ?>"> <i class="menu-icon fa fa-laptop"></i>View Distributor</a></li>
-                    <li><a href=""> <i class="menu-icon fa fa-laptop"></i>Generate Order</a></li>
+                    <li><a href="<?php echo base_url('GenerateOrder/'); ?>"> <i class="menu-icon fa fa-laptop"></i>Generate Order</a></li>
                     <li><a href=""> <i class="menu-icon fa fa-laptop"></i>View Invoice</a></li>
                     <li><a href="<?php echo base_url('AdminPanel/logOut'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-area-chart"></i>Logout</a></li>
                 </ul>
