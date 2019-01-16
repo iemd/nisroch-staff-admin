@@ -15,8 +15,8 @@
           </div>
           <div class="card-body card-block">
             <div class="row form-group">
-                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Order</label></div>
-                <div class="col-12 col-md-9">
+                <!--<div class="col col-md-3"><label for="text-input" class=" form-control-label">Order</label></div>-->
+                <div class="col col-md-12">
                   <select name="order" id="order" class="form-control order" required="">
                       <option value="new-order">New Order</option>
                       <option value="order-status">View Order Status</option>
@@ -127,8 +127,8 @@
                         <th>Order ID</th>
                          <th>Date</th>
                         <th>View Invoice</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Order Status</th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -145,9 +145,6 @@
                           <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
                         <?php endif; ?>
                         </td>
-
-              <td><a href="<?php //echo base_url('Staff/editStaff/').$row['ID']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>
-              <a href="<?php //echo base_url('Staff/deleteStaff/').$row['ID']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
                       </tr>
           <?php } ?>
 
