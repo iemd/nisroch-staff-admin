@@ -382,7 +382,15 @@ class DataModel extends CI_Model
 					$result = $query->result_array();
 					return $result;
 				}
-
+			public function ViewOrderStatus($staff_id=null)
+			{
+						$this->db->select('*');
+						$this->db->where('login_id', $staff_id);
+						$this->db->from('staff_order_request');
+						$query = $this->db->get();
+						$result = $query->result_array();
+						return $result;
+			}
 		public function editstaff($staff_id=null)
 			{
 				$this->db->select('*');

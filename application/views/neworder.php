@@ -1,33 +1,56 @@
 <?php $Loginid = $this->session->userdata('ID');?>
 <?php if (!empty($Loginid)){ ?>
+
+  <!-- Header-->
+  <div class="content mt-6">
+      <div class="animated fadeIn">
+      <div class="row">
+      <form action="<?php //echo base_url('VisitDealer/CreateVisitDealer/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <div class="col-lg-12">
+
+        <div class="card" style="background-color:#95ecd4;">
+          <div class="card-header">
+            <strong>GENERATE ORDER</strong>
+            <!--<h4 style="color:green;"><?php //echo $this->session->flashdata('message'); ?></h4>-->
+          </div>
+          <div class="card-body card-block">
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Order</label></div>
+                <div class="col-12 col-md-9">
+                  <select name="order" id="order" class="form-control order" required="">
+                      <option value="new-order">New Order</option>
+                      <option value="order-status">View Order Status</option>
+                  </select>
+                </div>
+
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </form>
+  </div><!-- .animated -->
+  </div><!-- .content -->
+</div><!-- /#right-panel -->
+<!-- Right Panel -->
+
         <!-- Header-->
-        <div class="content mt-6">
+        <div class="content mt-6" id="new-ord">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php //echo base_url('VisitDealer/CreateVisitDealer/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('Order/OrderGenerate/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
 
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
-                  <strong>GENERATE ORDER</strong>
+                  <strong>NEW ORDER</strong>
       						<h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
                 </div>
                 <div class="card-body card-block">
-                  <div class="row form-group">
-                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Order</label></div>
-                      <div class="col-12 col-md-6">
-                        <select name="order" id="order" class="form-control" required="">
-                            <option value="New Order<">New Order</option>
-                            <option value="View Order Status">View Order Status</option>
-                        </select>
-                      </div>
-
-                  </div>
-
-                  <div class="row form-group">
+                   <div class="row form-group">
                       <div class="col col-md-3"><label for="text-input" class=" form-control-label">OrderID/Date/Time</label></div>
-                      <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php echo $OrderID;?>" placeholder="Day" class="form-control" readonly></div>
-                      <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
+                      <div class="col-12 col-md-3"><input type="text" id="Orderid" name="Orderid" value="<?php echo $OrderID;?>" placeholder="Day" class="form-control" readonly></div>
+                      <div class="col-12 col-md-3"><input type="text" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
 
                     </div>
@@ -50,7 +73,7 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Product Type</label></div>
                         <div class="col-12 col-md-6">
-                          <select name="productType" id="order" class="form-control ptype" required="">
+                          <select name="ProductType" id="ProductType" class="form-control ptype" required="">
                              <option value="">Select Product Type</option>
                               <option value="NPP">NPP</option>
                               <option value="NBP">NBP</option>
@@ -64,7 +87,7 @@
 
                           </select>
                         </div>
-                        <div class="col-12 col-md-3"><input type="text" id="qty" name="qty" placeholder="Qty" class="form-control"></div>
+                        <div class="col-12 col-md-3"><input type="text" id="qty" name="qty" placeholder="Enter Quantity " class="form-control"></div>
                     </div>
                     <div class="row form-group">
 
@@ -86,6 +109,58 @@
         </div><!-- .content -->
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+    <div class="content mt-3" id="ord-status" style="display:none;">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card" style="background-color:#95ecd4;">
+                        <div class="card-header">
+                            <strong class="card-title">ORDER STATUS</strong>
+                        </div>
+            <?php //echo $this->session->flashdata('message');  ?>
+                        <div class="card-body">
+                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Sl.No.</th>
+                        <th>Order ID</th>
+                         <th>Date</th>
+                        <th>View Invoice</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+          <?php foreach($ViewOrderStatus as $row) { ?>
+                      <tr>
+            <?php //print_r($row);die; ?>
+                        <td><?php echo $row['order_id']; ?></td>
+                        <td><?php echo $row['Invoice']; ?></td>
+                        <td><?php echo $row['date']; ?></td>
+                        <td>View Invoice</td>
+                        <td><?php if($row['order_status'] == 1): ?>
+                          <button name="approve" class="btn btn-success btn-sm" id="approve">Approved</button>
+                        <?php else: ?>
+                          <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
+                        <?php endif; ?>
+                        </td>
+
+              <td><a href="<?php //echo base_url('Staff/editStaff/').$row['ID']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>
+              <a href="<?php //echo base_url('Staff/deleteStaff/').$row['ID']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
+                      </tr>
+          <?php } ?>
+
+                    </tbody>
+                  </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+            </div><!-- .animated -->
+        </div>
 
 <?php } else { ?>
 	 <?php redirect(base_url('AdminPanel')); ?>
@@ -96,7 +171,23 @@
     <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/plugins.js')?>"></script>
     <script src="<?php echo base_url('assets/js/main.js')?>"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery("select.order").change(function(){
+            var order = jQuery(".order option:selected").val();
+    		      //alert(order);
+            if(order=='order-status'){
+              jQuery("#ord-status").css("display","block");
+              jQuery("#new-ord").css("display","none");
+            }
+            if(order=='new-order'){
+              jQuery("#new-ord").css("display","block");
+              jQuery("#ord-status").css("display","none");
+            }
 
+        });
+    });
+    </script>
 <script>
       jQuery(function($){
         $('#followuptime').timepicker({
@@ -145,7 +236,7 @@ jQuery(document).ready(function(){
         var dist_id = jQuery(".abc option:selected").val();
 		//alert(dist_id);
 		jQuery.ajax({
-				url : "<?php echo site_url('GenerateOrder/DLimit');?>",
+				url : "<?php echo site_url('Order/DLimit');?>",
 				method : "POST",
 				data:'dist_id='+dist_id,
 				success: function(data){
@@ -162,7 +253,7 @@ jQuery(document).ready(function(){
         var ptype = jQuery(".ptype option:selected").val();
 		//alert(dist_id);
 		jQuery.ajax({
-				url : "<?php echo site_url('GenerateOrder/getProductList');?>",
+				url : "<?php echo site_url('Order/getProductList');?>",
 				method : "POST",
 				data:'ptype='+ptype,
 				success: function(data){

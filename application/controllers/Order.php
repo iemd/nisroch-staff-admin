@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class GenerateOrder extends CI_Controller {
+class Order extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,31 +26,38 @@ class GenerateOrder extends CI_Controller {
 		$data['OrderID'] = time() . rand(10*45, 100*98);
 		$staff_id = $this->session->userdata('ID');
 		$data['distributorlist'] = $this->DataModel->distributorlist();
-		$data['VisitDealerDetails'] = $this->DataModel->VisitDealerDetails($staff_id);
+		$data['ViewOrderStatus'] = $this->DataModel->ViewOrderStatus($staff_id);
 		$this->load->view('neworder',$data);
 	}
 
-	public function CreateVisitDealer()
-	{
-		$data['visit_date'] = date('Y-m-d H:i:s');
-		$data['currentNpp'] = $this->input->post('nppLimit');
-		$data['currentNbp'] = $this->input->post('nbpLimit');
-		$data['remark'] = $this->input->post('Remark');
-		$data['followup_time'] = $this->input->post('followuptime');
-		$data['followup_date'] = $this->input->post('followupdate');
+	public function OrderGenerate()
+{
+		$data['Invoice'] = $this->input->post('Orderid');
+		$data['date'] = $this->input->post('date');
+		//$data['Billtaxtype'] = $this->input->post('taxType');
+		$data['Distributor_id'] = $this->input->post('Distributor');
+		$data['login_id'] = $this->session->userdata['ID'];
+		$data['ProductType'] = $this->input->post('ProductType');
+		//$data['transportType'] = $this->db->escape_str(trim($this->input->post('transportType')));
+		if($data['ProductType'] == 'NPP'){
+		$data['current_limit']	= $this->input->post('nppLimit');
+		}
+		if($data['ProductType'] == 'NBP'){
+		$data['current_limit']	= $this->input->post('nbpLimit');
+		}
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
-		$data['DistributorID'] = $this->input->post('Distributor');
-		$data['created_by'] = $this->session->userdata('ID');
-		$insert =  $this->db->insert('staff_visit_dealer',$data);
+		$insert =  $this->db->insert('staff_order_request',$data);
+		$return = $this->db->insert_id();
+		$this->session->set_userdata('invoiceData', $return);
+    //echo $this->db->last_query();die;
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 order successfully created');
-			redirect(base_url('GenerateOrder/'), 'refresh', $message);
+			$message = $this->session->set_flashdata('message', '1 new order request generated');
+			redirect(base_url('Order/'), 'refresh', $message);
 
 		}
-
-	}
+ }
 	public function Listing()
 	{
 		$this->load->model('DataModel');
