@@ -29,21 +29,18 @@ class Enquiry extends CI_Controller {
 
 	public function SendEnquiry()
 	{
-		$data['visit_date'] = date('Y-m-d H:i:s');
-		$data['currentNpp'] = $this->input->post('nppLimit');
-		$data['currentNbp'] = $this->input->post('nbpLimit');
-		$data['remark'] = $this->input->post('Remark');
-		$data['followup_time'] = $this->input->post('followuptime');
-		$data['followup_date'] = $this->input->post('followupdate');
-		$data['latitude'] = $this->input->post('latitude');
-		$data['longitude'] = $this->input->post('longitude');
-		$data['DistributorID'] = $this->input->post('Distributor');
+		$data['date'] = date('Y-m-d H:i:s');
+		$data['subject'] = $this->input->post('Subject');
+		$data['message'] = $this->input->post('Message');
+		//$data['remark'] = $this->input->post('Remark');
+		//$data['latitude'] = $this->input->post('latitude');
+		//$data['longitude'] = $this->input->post('longitude');
 		$data['created_by'] = $this->session->userdata('ID');
 		$insert =  $this->db->insert('staff_enquiry',$data);
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 visit successfully created');
-			redirect(base_url('VisitFarmer/'), 'refresh', $message);
+			$message = $this->session->set_flashdata('message', 'Message sent');
+			redirect(base_url('Enquiry/'), 'refresh', $message);
 
 		}
 

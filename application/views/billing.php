@@ -4,46 +4,46 @@
 <div class="card-title">
                                       <h3 class="text-center">Billing</h3>
                                   </div>
-								  
+
 								  <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                        </div>
 									   <br>
-<div class="col-lg-12">        
-                                     
+<div class="col-lg-12">
+
                                       <form action="<?php echo base_url('Billing/InvoiceGenerate/'); ?>" method="post" novalidate="novalidate">
-                                      
+
                                       <div class="row">
                                           <div class="col-3">
                                               <div class="form-group">
                                                   <label for="cc-exp" class="control-label mb-1">Invoice Id.</label>
                                                   <input id="Invoice" name="Invoice" type="text" class="form-control cc-exp" value="NCP/A-<?php echo count($bill); ?>" >
-                                                  
+
                                               </div>
                                           </div>
                                           <div class="col-3">
                                               <label for="x_card_code" class="control-label mb-1">Date</label>
                                               <div class="input-group">
                                                   <input id="date" name="date" type="text" class="form-control cc-cvc" value="" placeholder="YYYY-MM-DD" >
-                                                  
+
                                               </div>
                                           </div>
-										  
+
 										   <div class="col-3">
                                               <label for="x_card_code" class="control-label mb-1">Tax Type</label>
                                               <select name="taxType" id="taxType" class="form-control" required>
-												
+
 												<option value="">Select Tax</option>
 													<option value="GST">CGST + SGST</option>
 													<option value="IGST">IGST</option>
 											  </select>
 											  <br>
                                           </div>
-										  
+
 										  <div class="col-3">
                                               <label for="x_card_code" class="control-label mb-1">Product Type</label>
                                               <select name="ProductType" id="ProductType" class="form-control" required>
-												
+
 												<option value="">Select Product Type</option>
 												<option value="NPP">NPP</option>
 												<option value="NBP">NBP</option>
@@ -53,7 +53,7 @@
 <div class="col-3">
                                               <label for="x_card_code" class="control-label mb-1">Transport</label>
                                               <select name="transportType" id="transportType" class="form-control" required>
-												
+
 												<option value="">Select Transport</option>
                                                                                                 <?php
                                                                                                 if(!empty($transport)){
@@ -64,24 +64,24 @@
                                                                                                     }
                                                                                                 }
                                                                                                 ?>
-												
-												
+
+
 											  </select>
 											  <br>
                                           </div>
 
-										  
+
 										  <div class="col-3">
                                              <label for="x_card_code" class="control-label mb-1">Distributor</label>
                                               <select name="Distributor" id="Distributor" class="form-control abc" required>
-												
+
 												<option value="">Select Distributor</option>
 												<?php foreach($distributorlist as $distributorlists){ ?>
 												<option value="<?php echo $distributorlists['dist_id']; ?>"><?php echo $distributorlists['name']; ?> | <?php echo $distributorlists['bcode']; ?></option>
 												<?php } ?>
 											  </select>
                                           </div>
-										  
+
 <script type="text/javascript">
 $(document).ready(function(){
     $("select.abc").change(function(){
@@ -102,42 +102,65 @@ $(document).ready(function(){
 
 
 
-										  
-										  
+
+
 										  <div id="limit"></div>
-										  
-										
-										  
+
+
+
                                        </div>
 									   <br>
-									   
+
 									   <div class="row">
                                           <div class="col-6">
 										  <input type="submit" class="btn btn-info" name="bill" id="bill" value="Generate Bill"/>
 										 </div>
                                        </div>
-									   
-									   
+
+
 									   </form>
-									   
-									   
+
+
 									   <br>
 									   <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                        </div>
 									  <br>
-									  
-										
-									
-									  
-									   
-                                     
-                              
+
+
+
+
+
+
+
                     <!-- .card -->
 
                   </div>
 				  <?php } else { ?>
-				  
+
 				  <?php redirect(base_url('AdminPanel')); ?>
-				  
+
 				  <?php } ?>
+          <script src="<?php echo base_url('assets/js/vendor/jquery-2.1.4.min.js')?>"></script>
+          <script src="<?php echo base_url('assets/js/vendor/jquery-ui.min.js')?>"></script>
+          <script src="<?php echo base_url('assets/js/vendor/jquery.timepicker.min.js')?>"></script>
+          <script>
+            jQuery(function($){
+              $('#followuptime').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 30,
+                minTime: '10',
+                maxTime: '6:00pm',
+                //defaultTime: '11',
+                startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+              });
+            });
+          </script>
+          <script>
+          jQuery( function() {
+            jQuery( "#date" ).datepicker( { dateFormat: 'yy-mm-dd' });
+          } );
+      </script>

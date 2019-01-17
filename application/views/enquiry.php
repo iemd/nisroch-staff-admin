@@ -5,7 +5,7 @@
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php //echo base_url('Enquiry/SendEnquiry/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('Enquiry/SendEnquiry/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
@@ -15,7 +15,7 @@
                 <div class="card-body card-block">
                   <div class="row form-group">
                       <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date/Time/Day</label></div>
-                      <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
+                      <div class="col-12 col-md-3"><input type="text" id="dateofenquiry" name="dateofenquiry" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
                     </div>
