@@ -45,6 +45,7 @@
                 <div class="card-header">
                   <strong>NEW ORDER</strong>
       						<h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
+                  <h4 style="color:red;"><?php echo $this->session->flashdata('error'); ?></h4>
                 </div>
                 <div class="card-body card-block">
                    <div class="row form-group">
@@ -56,7 +57,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Distributor</label></div>
-                        <div class="col-12 col-md-9">
+                        <div class="col-12 col-md-6">
                           <select name="Distributor" id="Distributor" class="form-control abc" required="">
                               <option value="">Select Distributor</option>
                               <?php foreach($distributorlist as $distributorlists){ ?>
@@ -72,22 +73,30 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Product Type</label></div>
-                        <div class="col-12 col-md-6">
+                        <div class="col col-md-3">
                           <select name="ProductType" id="ProductType" class="form-control ptype" required="">
                              <option value="">Select Product Type</option>
                               <option value="NPP">NPP</option>
                               <option value="NBP">NBP</option>
                           </select>
                         </div>
+                        <div class="col col-md-3">
+                          <button type="button" style="background-color:green"; id="addmore" class="btn btn-primary btn-xs">
+          								<i class="fa fa-plus-circle"></i>&nbsp;Add
+                          </button>
+                        </div>
                     </div>
-                    <div class="row form-group">
+                    <div id="addMoreProducts" class="row form-group" style="display:none;">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Select Product</label></div>
-                        <div class="col-12 col-md-6">
-                          <select name="productList" id="productList" class="form-control" required="">
+                        <div class="col col-md-3">
+                          <select name="productList[]" id="productList" class="form-control" >
 
                           </select>
                         </div>
-                        <div class="col-12 col-md-3"><input type="text" id="qty" name="qty" placeholder="Enter Quantity " class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="Qty" name="Qty[]" maxlength="2" size="4" placeholder="Qty" value="1" class="form-control"></div>
+                        <div class="col col-md-3" style="width:30%;"><button type="button" id="delete" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash"></i>&nbsp;Delete
+                        </button></div>
                     </div>
                     <div class="row form-group">
 
@@ -259,6 +268,34 @@ jQuery(document).ready(function(){
 				}
 			});
     });
+});
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+          //var count = 0;
+    jQuery("#addmore").click(function() {
+
+          //if (count >= 5) return;
+                  var ptype = jQuery("#ProductType").val();
+
+                  if(ptype == ''){
+                    alert("Select product type");
+                  }
+                  else{
+                    
+                    jQuery("#addMoreProducts").first().clone().insertAfter("#addMoreProducts").show();
+                  }
+                 attach_delete();
+        //count++;
+    });
+
+    function attach_delete(){
+      //jQuery('button.btn-danger').off();
+      jQuery('button.btn-danger').click(function(){
+          //console.log("click");
+        jQuery(this).closest("#addMoreProducts").remove();
+        });
+    }
 });
 </script>
 </body>

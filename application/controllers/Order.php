@@ -32,6 +32,14 @@ class Order extends CI_Controller {
 
 	public function OrderGenerate()
 {
+
+		$productList = $this->input->post('productList');
+		$Qty = $this->input->post('Qty');
+		array_shift($productList);
+		array_shift($Qty);
+		$cart['Products'] = $productList;
+		$cart['Qty'] = $Qty;
+		//print_r($cart);die;
 		$data['Invoice'] = $this->input->post('Orderid');
 		$data['date'] = $this->input->post('date');
 		//$data['Billtaxtype'] = $this->input->post('taxType');
@@ -47,15 +55,20 @@ class Order extends CI_Controller {
 		}
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
-		$insert =  $this->db->insert('staff_order_request',$data);
-		$return = $this->db->insert_id();
-		$this->session->set_userdata('invoiceData', $return);
-    //echo $this->db->last_query();die;
-		if($insert)
-		{
-			$message = $this->session->set_flashdata('message', '1 new order request generated');
+		if(empty($productList)){
+			$message = $this->session->set_flashdata('error', 'Please add atleast 1 product');
 			redirect(base_url('Order/'), 'refresh', $message);
+		}else{
+					$insert =  $this->db->insert('staff_order_request',$data);
+					$return = $this->db->insert_id();
+					$this->session->set_userdata('invoiceData', $return);
+		    //echo $this->db->last_query();die;
+				if($insert)
+				{
+					$message = $this->session->set_flashdata('message', '1 new order request generated');
+					redirect(base_url('Order/'), 'refresh', $message);
 
+				}
 		}
  }
 	public function Listing()
