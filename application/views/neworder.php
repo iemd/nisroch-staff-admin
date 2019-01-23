@@ -57,7 +57,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Distributor</label></div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-9">
                           <select name="Distributor" id="Distributor" class="form-control abc" required="">
                               <option value="">Select Distributor</option>
                               <?php foreach($distributorlist as $distributorlists){ ?>
@@ -71,6 +71,7 @@
 
 
                     </div>
+
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Product Type</label></div>
                         <div class="col col-md-3">
@@ -82,28 +83,26 @@
                         </div>
                         <div class="col col-md-3">
                           <button type="button" style="background-color:green"; id="addmore" class="btn btn-primary btn-xs">
-          								<i class="fa fa-plus-circle"></i>&nbsp;Add
+          								<i class="fa fa-plus-circle"></i>&nbsp;Add More Products
                           </button>
                         </div>
                     </div>
-                    <div id="addMoreProducts" class="row form-group" style="display:none;">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Select Product</label></div>
+
+                    <div id="addMoreProducts" class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Select Product</label></div>
                         <div class="col col-md-3">
-                          <select name="productList[]" id="productList" class="form-control" >
+                          <select name="productList[]" id="productList" class="form-control" required>
 
                           </select>
                         </div>
                         <div class="col col-md-3"><input type="text" id="Qty" name="Qty[]" maxlength="2" size="4" placeholder="Qty" value="1" class="form-control"></div>
-                        <div class="col col-md-3" style="width:30%;"><button type="button" id="delete" class="btn btn-danger btn-xs">
-                        <i class="fa fa-trash"></i>&nbsp;Delete
-                        </button></div>
+                        <div class="col col-md-3" style="width:30%;" id="delete-btn" ></div>
                     </div>
                     <div class="row form-group">
 
                         <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
                         <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
                       </div>
-
 
                   <div class="card-footer" style="background-color:#95ecd4;">
       								<button type="submit" class="btn btn-primary btn-sm">
@@ -282,8 +281,12 @@ jQuery(document).ready(function() {
                     alert("Select product type");
                   }
                   else{
-                    
-                    jQuery("#addMoreProducts").first().clone().insertAfter("#addMoreProducts").show();
+
+                    var clone = jQuery("#addMoreProducts").first().clone();
+                    //clone.find("#productList").attr("required","");
+                    clone.find("#delete-btn").append("<button type='button' id='delete' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i>&nbsp;Delete</button>");
+                    clone.insertAfter("#addMoreProducts").show();
+
                   }
                  attach_delete();
         //count++;
