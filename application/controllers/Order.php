@@ -27,18 +27,15 @@ class Order extends CI_Controller {
 		$staff_id = $this->session->userdata('ID');
 		$data['distributorlist'] = $this->DataModel->distributorlist();
 		$data['ViewOrderStatus'] = $this->DataModel->ViewOrderStatus($staff_id);
+		$data['editData'] = $this->DataModel->NPPgetData();
 		$this->load->view('neworder',$data);
 	}
 
-	public function OrderGenerate()
+	public function NewOrder()
 {
 
 		$productList = $this->input->post('productList');
 		$Qty = $this->input->post('Qty');
-		array_shift($productList);
-		array_shift($Qty);
-		$cart['Products'] = $productList;
-		$cart['Qty'] = $Qty;
 		//print_r($cart);die;
 		$data['Invoice'] = $this->input->post('Orderid');
 		$data['date'] = $this->input->post('date');
@@ -65,9 +62,20 @@ class Order extends CI_Controller {
 		    //echo $this->db->last_query();die;
 				if($insert)
 				{
-					$message = $this->session->set_flashdata('message', '1 new order request generated');
-					redirect(base_url('Order/'), 'refresh', $message);
+						$i=0;
+						foreach($productList as $product){
+							$cart['invoiceId'] = $return;
+							$cart['prod_id'] = $product;
+							$cart['quantity'] = $Qty[$i];
+							$cart['created_by'] = $this->session->userdata['ID'];
+							$insert =  $this->db->insert('staff_addcart',$cart);
+							$i++;
+						}
+						if($insert){
+							$message = $this->session->set_flashdata('message', '1 new order request generated');
+							redirect(base_url('Order/'), 'refresh', $message);
 
+						}
 				}
 		}
  }
@@ -100,21 +108,29 @@ class Order extends CI_Controller {
 	}
 
 }
-public function getProductList()
-{
-	$this->load->model('DataModel');
-	$ptype = $this->input->post('ptype');
-	$productCollection = $this->DataModel->getProductByType($ptype);
-	$options = "<option value=''>Select Product</option>";
-	foreach($productCollection as $row){
-		$ProdID = $row['prod_id'];
-		$ProdName = $row['prod_name'];
-		$options.="<option value='$ProdID'>$ProdName</option>";
+
+	public function getProductList()
+	{
+			$this->load->model('DataModel');
+			$ptype = $this->input->post('ptype');
+			$productCollection = $this->DataModel->getProductByType($ptype);
+			$options = "<option value=''>Select $ptype Product</option>";
+			foreach($productCollection as $row){
+					$ProdID = $row['prod_id'];
+					$ProdName = $row['prod_name'];
+					$bagqty = $row['bagqty'];
+					$caseqty = $row['caseqty'];
+					$drumqty = $row['drumqty'];
+					$customqty = $row['customqty'];
+					if(($bagqty <= 0) && ($caseqty <= 0) && ($drumqty <= 0) && ($customqty <= 0)){
+							$options.="<option style='background-color: #de7a65;' value='$ProdID'>Stock Not Available | $ProdName</option>";
+					}else if(($bagqty <= 0) OR ($caseqty <= 0) OR ($drumqty <= 0) OR ($customqty <= 0)){
+						  $options.="<option style='background-color: #de7a65;' value='$ProdID'>$bagqty | $ProdName</option>";
+					}
+					else{
+						$options.="<option value='$ProdID'>$ProdName</option>";
+					}
+			}
+			echo 	$options;
 	}
-
-
-echo 	$options;
-
-}
-
 }

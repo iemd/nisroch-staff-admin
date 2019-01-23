@@ -38,7 +38,7 @@
         <div class="content mt-6" id="new-ord">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php echo base_url('Order/OrderGenerate/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('Order/NewOrder/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
 
               <div class="card" style="background-color:#95ecd4;">
@@ -74,14 +74,14 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Product Type</label></div>
-                        <div class="col col-md-3">
+                        <div class="col col-md-5">
                           <select name="ProductType" id="ProductType" class="form-control ptype" required="">
                              <option value="">Select Product Type</option>
                               <option value="NPP">NPP</option>
                               <option value="NBP">NBP</option>
                           </select>
                         </div>
-                        <div class="col col-md-3">
+                        <div class="col col-md-4">
                           <button type="button" style="background-color:green"; id="addmore" class="btn btn-primary btn-xs">
           								<i class="fa fa-plus-circle"></i>&nbsp;Add More Products
                           </button>
@@ -90,13 +90,13 @@
 
                     <div id="addMoreProducts" class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class="form-control-label">Select Product</label></div>
-                        <div class="col col-md-3">
+                        <div class="col col-md-5">
                           <select name="productList[]" id="productList" class="form-control" required>
 
                           </select>
                         </div>
-                        <div class="col col-md-3"><input type="text" id="Qty" name="Qty[]" maxlength="2" size="4" placeholder="Qty" value="1" class="form-control"></div>
-                        <div class="col col-md-3" style="width:30%;" id="delete-btn" ></div>
+                        <div class="col col-md-2"><input type="text" id="Qty" name="Qty[]" maxlength="2" size="4" placeholder="Qty" value="1" class="form-control"></div>
+                        <div class="col col-md-2" style="width:30%;" id="delete-btn" ></div>
                     </div>
                     <div class="row form-group">
 
