@@ -27,6 +27,7 @@ class NewMeeting extends CI_Controller {
 
 	public function CreateMeeting()
 	{
+
 		$data['meeting_date'] = date('Y-m-d H:i:s');
 		$data['person_name'] = $this->input->post('nameofperson');
 		$data['business_name'] = $this->input->post('nameofbusiness');
@@ -41,6 +42,7 @@ class NewMeeting extends CI_Controller {
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
 		$data['status'] = $this->input->post('status');
+		$data['created_by'] = $this->session->userdata('ID');
 		$insert =  $this->db->insert('staff_meeting',$data);
 		if($insert)
 		{
@@ -52,45 +54,43 @@ class NewMeeting extends CI_Controller {
 	}
 	public function Listing()
 	{
+		$staff_id = $this->session->userdata('ID');
 		$this->load->model('DataModel');
-		$data['meetinglist'] = $this->DataModel->meetinglist();
+		$data['meetinglist'] = $this->DataModel->StaffMeetingList($staff_id);
 		//print_r($data['meetinglist']);die;
 		$this->load->view('common/header');
 		$this->load->view('meetingList', $data);
 	}
 
-	/*public function editMeeting($meet_id=null)
+	public function editMeeting($meet_id=null)
 	{
 		$this->load->model('DataModel');
-		$data['editmeeting'] = $this->DataModel->editmeeting($meet_id);
+		$data['editmeeting'] = $this->DataModel->StaffEditMeeting($meet_id);
 		//print_r($data['editmeeting']);die;
 		$this->load->view('common/header');
 		$this->load->view('editmeeting', $data);
 	}
 
-	public function UpdateMeeting($dist_id=null)
+	public function UpdateMeeting($meet_id=null)
 	{
 		$this->load->model('DataModel');
-		$data['name'] = $this->input->post('name');
-		$data['bcode'] = $this->input->post('BuyerCode');
-		$data['State'] = $this->input->post('State');
-		$data['City'] = $this->input->post('City');
-		$data['Pincode'] = $this->input->post('Pincode');
-		$data['DAddress'] = $this->input->post('DAddress');
-		$data['email'] = $this->input->post('email');
-		$data['number'] = $this->input->post('number');
-		$data['gst'] = $this->input->post('gst');
-		$data['pos'] = $this->input->post('pos');
-		$data['Destination'] = $this->input->post('Destination');
-		$data['pnumber'] = $this->input->post('pnumber');
-		$data['npp'] = $this->input->post('npp');
-		$data['nbp'] = $this->input->post('nbp');
-		$data['nppLimit'] = $this->input->post('nppLimit');
-		$data['nbpLimit'] = $this->input->post('nbpLimit');
-		$data['currentNpp'] = $this->input->post('nppLimit');
-		$data['currentNbp'] = $this->input->post('nbpLimit');
+		$data['meeting_date'] = date('Y-m-d H:i:s');
+		$data['person_name'] = $this->input->post('nameofperson');
+		$data['business_name'] = $this->input->post('nameofbusiness');
+		$data['contact'] = $this->input->post('contact');
+		$data['addr_city'] = $this->input->post('City');
+		$data['addr_dist'] = $this->input->post('District');
+		$data['addr_pin'] = $this->input->post('Pincode');
+		$data['concern'] = $this->input->post('Concern');
+		$data['remark'] = $this->input->post('Remark');
+		$data['followup_time'] = $this->input->post('followuptime');
+		$data['followup_date'] = $this->input->post('followupdate');
+		$data['latitude'] = $this->input->post('latitude');
+		$data['longitude'] = $this->input->post('longitude');
+		$data['status'] = $this->input->post('status');
+		$data['created_by'] = $this->session->userdata('ID');
 
-		$update = $this->DataModel->updatemeeting($meet_id, $data);
+		$update = $this->DataModel->StaffUpdateMeeting($meet_id, $data);
 		if($update){
 			$message = $this->session->set_flashdata('message', 'Updated successfully !');
 			redirect(base_url('NewMeeting/Listing'), 'refresh');
@@ -98,14 +98,14 @@ class NewMeeting extends CI_Controller {
 	}
 
 
-	public function deleteMeeting($dist_id=null)
+	public function deleteMeeting($meet_id=null)
 	{
 		$this->load->model('DataModel');
-		$deleteMeeting = $this->DataModel->deleteMeeting($meet_id);
+		$deleteMeeting = $this->DataModel->StaffDeleteMeeting($meet_id);
 		if($deleteMeeting){
 			$message = $this->session->set_flashdata('message', 'Deleted successfully !');
 			redirect(base_url('NewMeeting/Listing'), 'refresh');
 		}
-	}*/
+	}
 
 }

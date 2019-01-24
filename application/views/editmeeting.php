@@ -1,10 +1,11 @@
+<?php foreach($editmeeting as $row){ } ?>
 <?php $Loginid = $this->session->userdata('ID');?>
 <?php if (!empty($Loginid)){ ?>
         <!-- Header-->
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php echo base_url('newmeeting/createmeeting/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('NewMeeting/UpdateMeeting/'.$row['meet_id']); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
@@ -20,37 +21,37 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name of Person</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="nameofperson" name="nameofperson" placeholder="Name of Person" class="form-control" required></div>
+                        <div class="col-12 col-md-9"><input type="text" id="nameofperson" name="nameofperson" value="<?php echo $row['person_name']; ?>" placeholder="Name of Person" class="form-control" required></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name of Business</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="nameofbusiness" name="nameofbusiness" placeholder="Name of Business" class="form-control" required></div>
+                          <div class="col-12 col-md-9"><input type="text" id="nameofbusiness" name="nameofbusiness" value="<?php echo $row['business_name']; ?>" placeholder="Name of Business" class="form-control" required></div>
 
                      </div>
 
                     <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Contact No.</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="contact" name="contact" placeholder="Contact Number" class="form-control"></div>
+                          <div class="col-12 col-md-9"><input type="text" id="contact" name="contact" value="<?php echo $row['contact']; ?>" placeholder="Contact Number" class="form-control"></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
-                        <div class="col-12 col-md-3"><input type="text" id="City" name="City" placeholder="City" class="form-control"></div>
-                        <div class="col-12 col-md-3"><input type="text" id="District" name="District" placeholder="District" class="form-control"></div>
-                        <div class="col-12 col-md-3"><input type="text" id="Pincode" name="Pincode" placeholder="Pincode" class="form-control"></div>
+                        <div class="col-12 col-md-3"><input type="text" id="City" name="City" value="<?php echo $row['addr_city']; ?>" placeholder="City" class="form-control"></div>
+                        <div class="col-12 col-md-3"><input type="text" id="District" name="District" value="<?php echo $row['addr_dist']; ?>" placeholder="District" class="form-control"></div>
+                        <div class="col-12 col-md-3"><input type="text" id="Pincode" name="Pincode" value="<?php echo $row['addr_pin']; ?>" placeholder="Pincode" class="form-control"></div>
                       </div>
 
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Concern</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="Concern" name="Concern" placeholder="Concern" class="form-control"></div>
+                        <div class="col-12 col-md-9"><input type="text" id="Concern" name="Concern" value="<?php echo $row['concern']; ?>" placeholder="Concern" class="form-control"></div>
                       </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Remark</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="Remark" name="Remark" placeholder="Remark" class="form-control"></div>
+                        <div class="col-12 col-md-9"><input type="text" id="Remark" name="Remark" value="<?php echo $row['remark']; ?>" placeholder="Remark" class="form-control"></div>
                       </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Follow Up</label></div>
-                        <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" placeholder="HH:MM" class="form-control"></div>
-                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" placeholder="DD-MM-YYYY" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" value="<?php echo $row['followup_time']; ?>" placeholder="HH:MM" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" value="<?php echo $row['followup_date']; ?>" placeholder="DD-MM-YYYY" class="form-control"></div>
                         <div class="col col-md-3">&nbsp;</div>
                         <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
                         <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
@@ -60,11 +61,11 @@
                           <div class="col-12 col-md-9">
                             <select name="status" id="status" class="form-control" required="">
                                 <option value="">Select</option>
-                                <option value="Active">Active</option>
-								                <option value="Inactive">Inactive</option>
-                                <option value="Not Interested">Not Interested</option>
-                                <option value="In Process">In Process</option>
-                                <option value="Pending">Pending</option>
+                                <option value="Active" <?php if($row['status']=='Active'){echo"selected";} ?> >Active</option>
+								                <option value="Inactive" <?php if($row['status']=='Inactive'){echo"selected";} ?>>Inactive</option>
+                                <option value="Not Interested" <?php if($row['status']=='Not Interested'){echo"selected";} ?>>Not Interested</option>
+                                <option value="In Process" <?php if($row['status']=='In Process'){echo"selected";} ?>>In Process</option>
+                                <option value="Pending" <?php if($row['status']=='Pending'){echo"selected";} ?>>Pending</option>
                             </select>
                           </div>
                         </div>

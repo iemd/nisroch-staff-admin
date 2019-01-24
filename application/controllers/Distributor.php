@@ -52,8 +52,9 @@ class Distributor extends CI_Controller {
 
 	public function Listing()
 	{
+		$staff_id = $this->session->userdata('ID');
 		$this->load->model('DataModel');
-		$data['StaffDistributorlist'] = $this->DataModel->StaffDistributorlist();
+		$data['StaffDistributorlist'] = $this->DataModel->StaffDistributorlist($staff_id);
 		//print_r($data['distributorlist']);die;
 		$this->load->view('common/header');
 		$this->load->view('SraffDistributorList', $data);

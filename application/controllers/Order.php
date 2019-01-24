@@ -25,15 +25,15 @@ class Order extends CI_Controller {
 		$this->load->helper('string');
 		$data['OrderID'] = time() . rand(10*45, 100*98);
 		$staff_id = $this->session->userdata('ID');
-		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$data['distributorlist'] = $this->DataModel->StaffApprovedDistributorlist($staff_id);
 		$data['ViewOrderStatus'] = $this->DataModel->ViewOrderStatus($staff_id);
 		$data['editData'] = $this->DataModel->NPPgetData();
 		$this->load->view('neworder',$data);
 	}
 
-	public function NewOrder()
+public function NewOrder()
 {
-
+    $this->load->model('DataModel');
 		$productList = $this->input->post('productList');
 		$Qty = $this->input->post('Qty');
 		//print_r($cart);die;
@@ -64,10 +64,51 @@ class Order extends CI_Controller {
 				{
 						$i=0;
 						foreach($productList as $product){
+							$productDetails = $this->DataModel->getProduct($product);
+							$quantitytype = $this->DataModel->getQuantityType($product);
+							foreach($productDetails as $productDetail){}
 							$cart['invoiceId'] = $return;
 							$cart['prod_id'] = $product;
+							$cart['prod_name'] = $productDetail['prod_name'];
+							$cart['hsn'] = $productDetail['hsn'];
+							$cart['batch'] = $productDetail['batch'];
+							$cart['mdate'] = $productDetail['mfg'];
+							$cart['edate'] = $productDetail['exp'];
+							$base_price=""; $psize="";
+							if($quantitytype == "Bag"){
+								$base_price = $productDetail['bagprice'];
+								$psize = $productDetail['size'];
+								$bagqty = $productDetail['bagqty'];
+								$qty = $bagqty - $Qty[$i];
+								//$this->DataModel->bagstockin($qty, $product);
+							}
+							if($quantitytype == "Case"){
+								$base_price = $productDetail['caseprice'];
+								$psize = $productDetail['csize'];
+								$caseqty = $productDetail['caseqty'];
+								$qty = $caseqty - $Qty[$i];
+								//$this->DataModel->casestockin($qty, $product);
+							}
+							if($quantitytype == "Drum"){
+								$base_price = $productDetail['drumprice'];
+								$psize = $productDetail['dsize'];
+								$drumqty = $productDetail['drumqty'];
+								$qty = $drumqty - $Qty[$i];
+								//$this->DataModel->drumstockin($qty, $product);
+							}
+							if($quantitytype == "Custom"){
+								$base_price = $productDetail['customprice'];
+								$psize = "Custom";
+								$customqty = $productDetail['customqty'];
+								$qty = $customqty - $Qty[$i];
+								//$this->DataModel->customstockin($qty, $product);
+							}
+							$cart['psize'] = $psize;
 							$cart['quantity'] = $Qty[$i];
+							$cart['quantitytype'] = $quantitytype;
+							$cart['base_price'] = $base_price;
 							$cart['created_by'] = $this->session->userdata['ID'];
+              //print_r($cart); die;
 							$insert =  $this->db->insert('staff_addcart',$cart);
 							$i++;
 						}
@@ -93,7 +134,7 @@ class Order extends CI_Controller {
 		$dist_id = $this->input->post('dist_id');
 		$limit="";
 		if(!empty($dist_id)){
-			$distlimit = $this->DataModel->distlimit($dist_id);
+			$distlimit = $this->DataModel->StaffDistLimit($dist_id);
 			foreach($distlimit as $row){
 			}
 			$nppLimit = $row['currentNpp'];
