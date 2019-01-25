@@ -1,49 +1,41 @@
-<?php foreach($editmeeting as $row){ } ?>
 <?php $Loginid = $this->session->userdata('ID');?>
 <?php if (!empty($Loginid)){ ?>
+<?php foreach($editVisitfarmer as $row){} ?>
         <!-- Header-->
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php echo base_url('NewMeeting/UpdateMeeting/'.$row['meet_id']); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('VisitFarmer/update/'.$row['visit_id']); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
-                  <strong>EDIT MEETING</strong>
+                  <strong>EDIT VISIT FARMER</strong>
       						<h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
                 </div>
                 <div class="card-body card-block">
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date | Time | Day</label></div>
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date/Time/Day</label></div>
                       <div class="col-12 col-md-3"><input type="text" id="dateofmeeting" name="dateofmeeting" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name of Person</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="nameofperson" name="nameofperson" value="<?php echo $row['person_name']; ?>" placeholder="Name of Person" class="form-control" required></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Distributor</label></div>
+                        <div class="col-12 col-md-9">
+                          <select name="Distributor" id="Distributor" class="form-control abc" required="">
+                              <option value="">Select Distributor</option>
+                              <?php foreach($staffDistributors as $staffDistributor){ ?>
+      												<option value="<?php echo $staffDistributor['dist_id']; ?>" <?php if($staffDistributor['dist_id'] == $row['DistributorID']){echo"selected";} ?> ><?php echo $staffDistributor['name']; ?> | <?php echo $staffDistributor['bcode']; ?></option>
+      												<?php } ?>
+                          </select>
+                        </div>
                       </div>
-                      <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name of Business</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="nameofbusiness" name="nameofbusiness" value="<?php echo $row['business_name']; ?>" placeholder="Name of Business" class="form-control" required></div>
-
-                     </div>
-
-                    <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Contact No.</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="contact" name="contact" value="<?php echo $row['contact']; ?>" placeholder="Contact Number" class="form-control"></div>
+                    <div class='row form-group' id="limit">
+                      <div class="col col-md-3"><label for="text-input" class="form-control-label">NPP Limit | NBP Limit</label></div>
+		                    <div class="col col-md-3"><input type="text" id="nppLimit" name="nppLimit" value="<?php echo $row['currentNpp']; ?>" placeholder="NPP Limit" class="form-control" readonly></div>
+			                     <div class="col col-md-3"><input type="text" id="nbpLimit" name="nbpLimit" value="<?php echo $row['currentNbp']; ?>" placeholder="NBP Limit" class="form-control" readonly></div>
+			                        <div class="col col-md-3"><label for="text-input" class="form-control-label">&nbsp;</label></div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
-                        <div class="col-12 col-md-3"><input type="text" id="City" name="City" value="<?php echo $row['addr_city']; ?>" placeholder="City" class="form-control"></div>
-                        <div class="col-12 col-md-3"><input type="text" id="District" name="District" value="<?php echo $row['addr_dist']; ?>" placeholder="District" class="form-control"></div>
-                        <div class="col-12 col-md-3"><input type="text" id="Pincode" name="Pincode" value="<?php echo $row['addr_pin']; ?>" placeholder="Pincode" class="form-control"></div>
-                      </div>
-
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Concern</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="Concern" name="Concern" value="<?php echo $row['concern']; ?>" placeholder="Concern" class="form-control"></div>
-                      </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Remark</label></div>
                         <div class="col-12 col-md-9"><input type="text" id="Remark" name="Remark" value="<?php echo $row['remark']; ?>" placeholder="Remark" class="form-control"></div>
@@ -56,19 +48,7 @@
                         <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
                         <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
                       </div>
-                      <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
-                          <div class="col-12 col-md-9">
-                            <select name="status" id="status" class="form-control" required="">
-                                <option value="">Select</option>
-                                <option value="Active" <?php if($row['status']=='Active'){echo"selected";} ?> >Active</option>
-								                <option value="Inactive" <?php if($row['status']=='Inactive'){echo"selected";} ?>>Inactive</option>
-                                <option value="Not Interested" <?php if($row['status']=='Not Interested'){echo"selected";} ?>>Not Interested</option>
-                                <option value="In Process" <?php if($row['status']=='In Process'){echo"selected";} ?>>In Process</option>
-                                <option value="Pending" <?php if($row['status']=='Pending'){echo"selected";} ?>>Pending</option>
-                            </select>
-                          </div>
-                        </div>
+
 
                   <div class="card-footer" style="background-color:#95ecd4;">
       								<button type="submit" class="btn btn-primary btn-sm">
@@ -82,7 +62,7 @@
         </div><!-- .animated -->
         </div><!-- .content -->
     </div><!-- /#right-panel -->
-    <!-- Right Panel -->
+
 <?php } else { ?>
 	 <?php redirect(base_url('AdminPanel')); ?>
 <?php } ?>
@@ -134,6 +114,23 @@
     jQuery(function($){
       getLocation();
     });
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    jQuery("select.abc").change(function(){
+        var dist_id = jQuery(".abc option:selected").val();
+		//alert(dist_id);
+		jQuery.ajax({
+				url : "<?php echo site_url('VisitDealer/DLimit');?>",
+				method : "POST",
+				data:'dist_id='+dist_id,
+				success: function(data){
+					jQuery('#limit').html(data);
+					//alert(data);
+				}
+			});
+    });
+});
 </script>
 </body>
 </html>

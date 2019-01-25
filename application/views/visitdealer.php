@@ -8,7 +8,7 @@
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
-                  <strong>VISIT DEALER</strong>
+                  <strong>ADD VISIT DEALER</strong>
       						<h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
                 </div>
                 <div class="card-body card-block">
@@ -68,7 +68,7 @@
                 <div class="col-md-12">
                     <div class="card" style="background-color:#95ecd4;">
                         <div class="card-header">
-                            <strong class="card-title">Visit Dealer Details</strong>
+                            <strong class="card-title">VISIT DEALER DETAILS</strong>
                         </div>
 						<?php //echo $this->session->flashdata('message');  ?>
                         <div class="card-body">
@@ -93,8 +93,8 @@
                         <td><?php echo $row['followup_time']; ?></td>
                         <td><?php echo $row['followup_date']; ?></td>
 
-						  <td><a href="<?php //echo base_url('Staff/editStaff/').$row['ID']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>
-              <a href="<?php //echo base_url('Staff/deleteStaff/').$row['ID']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
+						  <td><a href="<?php echo base_url('VisitDealer/edit/').$row['visit_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>
+              <a href="<?php echo base_url('VisitDealer/delete/').$row['visit_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
                       </tr>
 					<?php } ?>
 

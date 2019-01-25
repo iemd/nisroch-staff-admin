@@ -8,7 +8,7 @@
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
-                  <strong>New Meeting</strong>
+                  <strong>ADD NEW MEETING</strong>
       						<h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
                 </div>
                 <div class="card-body card-block">

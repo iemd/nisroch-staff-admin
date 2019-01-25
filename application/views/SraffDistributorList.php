@@ -10,9 +10,10 @@
                 <div class="col-md-12">
                     <div class="card" style="background-color:#95ecd4;">
                         <div class="card-header">
-                            <strong class="card-title">Distributors</strong>
+                            <strong class="card-title">DISTRIBUTOR LIST</strong>
+                            <h4 style="color:green;"><?php echo $this->session->flashdata('message'); ?></h4>
                         </div>
-						<?php echo $this->session->flashdata('message');  ?>
+
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
@@ -39,7 +40,9 @@
               <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
             <?php endif; ?>
             </td>
-                      <td>  <a href="<?php //echo base_url('Inventory/AllLedgerPrint/'.$row['dist_id']); ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>&nbsp;&nbsp;<a href="<?php //echo base_url('Distributor/editDistributor/').$row['dist_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;<a href="<?php //echo base_url('Distributor/deleteDistributor/').$row['dist_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
+                      <td>  <a href="<?php //echo base_url('Inventory/AllLedgerPrint/'.$row['dist_id']); ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>&nbsp;&nbsp;
+                        <a href="<?php echo base_url('Distributor/edit/').$row['dist_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;
+                        <a href="<?php echo base_url('Distributor/delete/').$row['dist_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
                       </tr>
 					<?php } ?>
 

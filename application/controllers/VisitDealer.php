@@ -24,7 +24,7 @@ class VisitDealer extends CI_Controller {
 		$this->load->view('common/header');
 		//$this->load->helper('date_helper');
 		$staff_id = $this->session->userdata('ID');
-		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$data['distributorlist'] = $this->DataModel->StaffApprovedDistributorlist($staff_id);
 		$data['VisitDealerDetails'] = $this->DataModel->VisitDealerDetails($staff_id);
 		$this->load->view('visitdealer',$data);
 	}
@@ -62,7 +62,7 @@ class VisitDealer extends CI_Controller {
   {
 		$this->load->model('DataModel');
 		$dist_id = $this->input->post('dist_id');
-		$distlimit = $this->DataModel->distlimit($dist_id);
+		$distlimit = $this->DataModel->StaffDistLimit($dist_id);
 		foreach($distlimit as $row){
 		}
 		$nppLimit = $row['currentNpp'];
@@ -75,53 +75,47 @@ echo "<div class='col col-md-3'><label for='text-input' class='form-control-labe
 
 }
 
-	/*public function editMeeting($meet_id=null)
+	public function edit($visit_id=null)
 	{
 		$this->load->model('DataModel');
-		$data['editmeeting'] = $this->DataModel->editmeeting($meet_id);
+		$data['editVisitdealer'] = $this->DataModel->StaffEditVisitdealer($visit_id);
 		//print_r($data['editmeeting']);die;
 		$this->load->view('common/header');
-		$this->load->view('editmeeting', $data);
+		$staff_id = $this->session->userdata('ID');
+		$data['staffDistributors'] = $this->DataModel->StaffApprovedDistributorlist($staff_id);
+		$this->load->view('editVisitdealer', $data);
 	}
 
-	public function UpdateMeeting($dist_id=null)
+	public function update($visit_id=null)
 	{
 		$this->load->model('DataModel');
-		$data['name'] = $this->input->post('name');
-		$data['bcode'] = $this->input->post('BuyerCode');
-		$data['State'] = $this->input->post('State');
-		$data['City'] = $this->input->post('City');
-		$data['Pincode'] = $this->input->post('Pincode');
-		$data['DAddress'] = $this->input->post('DAddress');
-		$data['email'] = $this->input->post('email');
-		$data['number'] = $this->input->post('number');
-		$data['gst'] = $this->input->post('gst');
-		$data['pos'] = $this->input->post('pos');
-		$data['Destination'] = $this->input->post('Destination');
-		$data['pnumber'] = $this->input->post('pnumber');
-		$data['npp'] = $this->input->post('npp');
-		$data['nbp'] = $this->input->post('nbp');
-		$data['nppLimit'] = $this->input->post('nppLimit');
-		$data['nbpLimit'] = $this->input->post('nbpLimit');
+		$data['visit_date'] = date('Y-m-d H:i:s');
 		$data['currentNpp'] = $this->input->post('nppLimit');
 		$data['currentNbp'] = $this->input->post('nbpLimit');
+		$data['remark'] = $this->input->post('Remark');
+		$data['followup_time'] = $this->input->post('followuptime');
+		$data['followup_date'] = $this->input->post('followupdate');
+		$data['latitude'] = $this->input->post('latitude');
+		$data['longitude'] = $this->input->post('longitude');
+		$data['DistributorID'] = $this->input->post('Distributor');
+		$data['created_by'] = $this->session->userdata('ID');
 
-		$update = $this->DataModel->updatemeeting($meet_id, $data);
+		$update = $this->DataModel->StaffUpdateVisitdealer($visit_id, $data);
 		if($update){
 			$message = $this->session->set_flashdata('message', 'Updated successfully !');
-			redirect(base_url('NewMeeting/Listing'), 'refresh');
+			redirect(base_url('VisitDealer/'), 'refresh');
 		}
 	}
 
 
-	public function deleteMeeting($dist_id=null)
+	public function delete($visit_id=null)
 	{
 		$this->load->model('DataModel');
-		$deleteMeeting = $this->DataModel->deleteMeeting($meet_id);
-		if($deleteMeeting){
+		$delete = $this->DataModel->StaffDeleteVisitdealer($visit_id);
+		if($delete){
 			$message = $this->session->set_flashdata('message', 'Deleted successfully !');
-			redirect(base_url('NewMeeting/Listing'), 'refresh');
+			redirect(base_url('VisitDealer/'), 'refresh');
 		}
-	}*/
+	}
 
 }

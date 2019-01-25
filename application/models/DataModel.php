@@ -356,6 +356,81 @@ class DataModel extends CI_Model
 					return false;
 					}
 		}
+		public function StaffEditVisitdealer($visit_id=null)
+		 {
+					$this->db->select('*');
+					$this->db->where('visit_id',$visit_id);
+					$this->db->from('staff_visit_dealer');
+					$query = $this->db->get();
+					$result = $query->result_array();
+					return $result;
+		 }
+	 public function StaffUpdateVisitdealer($visit_id, $data)
+	 {
+				 $this->db->where('visit_id', $visit_id);
+				 return $this->db->update('staff_visit_dealer', $data);
+
+	 }
+	 public function StaffDeleteVisitdealer($visit_id)
+		 {
+			 $whereArray = array("visit_id"=>$visit_id);
+			 $query = $this->db->delete('staff_visit_dealer',$whereArray);
+			 if ($query) {
+				 return true;
+			 } else {
+				 return false;
+				 }
+	 }
+	 public function StaffEditVisitfarmer($visit_id=null)
+		{
+				 $this->db->select('*');
+				 $this->db->where('visit_id',$visit_id);
+				 $this->db->from('staff_visit_farmer');
+				 $query = $this->db->get();
+				 $result = $query->result_array();
+				 return $result;
+		}
+	public function StaffUpdateVisitfarmer($visit_id, $data)
+	{
+				$this->db->where('visit_id', $visit_id);
+				return $this->db->update('staff_visit_farmer', $data);
+
+	}
+	public function StaffDeleteVisitfarmer($visit_id)
+		{
+			$whereArray = array("visit_id"=>$visit_id);
+			$query = $this->db->delete('staff_visit_farmer',$whereArray);
+			if ($query) {
+				return true;
+			} else {
+				return false;
+				}
+	}
+	public function StaffEditDistributor($dist_id=null)
+	 {
+				$this->db->select('*');
+				$this->db->where('dist_id',$dist_id);
+				$this->db->from('staff_distributor');
+				$query = $this->db->get();
+				$result = $query->result_array();
+				return $result;
+	 }
+ public function StaffUpdateDistributor($dist_id, $data)
+ {
+			 $this->db->where('dist_id', $dist_id);
+			 return $this->db->update('staff_distributor', $data);
+
+ }
+ public function StaffDeleteDistributor($dist_id)
+	 {
+		 $whereArray = array("dist_id"=>$dist_id);
+		 $query = $this->db->delete('staff_distributor',$whereArray);
+		 if ($query) {
+			 return true;
+		 } else {
+			 return false;
+			 }
+ }
 		public function ledgerprint($bill_id=null)
 			{
 				$this->db->select('*');
