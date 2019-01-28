@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body card-block">
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date/Time/Day</label></div>
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Date | Time | Day</label></div>
                       <div class="col-12 col-md-3"><input type="text" id="dateofenquiry" name="dateofenquiry" value="<?php echo date('d-m-Y'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Day" name="Day" value="<?php $d=date('d-m-Y'); echo date('l',strtotime($d)); ?>" placeholder="Day" class="form-control" readonly></div>
@@ -49,6 +49,53 @@
         </div><!-- .content -->
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+    <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card" style="background-color:#95ecd4;">
+                        <div class="card-header">
+                            <strong class="card-title">SENT ENQUIRY</strong>
+                        </div>
+            <?php //echo $this->session->flashdata('message');  ?>
+                        <div class="card-body">
+                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Enquiry ID</th>
+                        <th>Date</th>
+                         <th>Subject</th>
+                        <th>Message</th>
+                        <th>Remark</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+          <?php foreach($EnquiryDetails as $row) { ?>
+                      <tr>
+            <?php //print_r($row);die; ?>
+                        <td><?php echo $row['enquiry_id']; ?></td>
+                        <td><?php echo $row['date']; ?></td>
+                        <td><?php echo $row['subject']; ?></td>
+                        <td><?php echo $row['message']; ?></td>
+                        <td><?php echo $row['remark']; ?></td>
+
+              <td><!--<a href="<?php //echo base_url('Enquiry/edit/').$row['enquiry_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>-->
+              <a href="<?php echo base_url('Enquiry/delete/').$row['enquiry_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
+                      </tr>
+          <?php } ?>
+
+                    </tbody>
+                  </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+            </div><!-- .animated -->
+        </div>
 
 <?php } else { ?>
 	 <?php redirect(base_url('AdminPanel')); ?>
@@ -60,64 +107,5 @@
     <script src="<?php echo base_url('assets/js/plugins.js')?>"></script>
     <script src="<?php echo base_url('assets/js/main.js')?>"></script>
 
-<script>
-      jQuery(function($){
-        $('#followuptime').timepicker({
-          timeFormat: 'h:mm p',
-          interval: 30,
-          minTime: '10',
-          maxTime: '6:00pm',
-          //defaultTime: '11',
-          startTime: '10:00',
-          dynamic: false,
-          dropdown: true,
-          scrollbar: true
-        });
-      });
-    </script>
-    <script>
-    jQuery( function() {
-      jQuery( "#followupdate" ).datepicker( { dateFormat: 'dd-mm-yy' });
-    } );
-</script>
-
-<script>
-    var lat = document.getElementById("latitude");
-    var lng = document.getElementById("longitude");
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        lat.value = 0; //Geolocation is not supported by this browser.
-        lng.value = 0; //Geolocation is not supported by this browser.
-      }
-    }
-
-    function showPosition(position) {
-      lat.value = position.coords.latitude;
-      lng.value = position.coords.longitude;
-    }
-    jQuery(function($){
-      getLocation();
-    });
-</script>
-<script type="text/javascript">
-jQuery(document).ready(function(){
-    jQuery("select.abc").change(function(){
-        var dist_id = jQuery(".abc option:selected").val();
-		//alert(dist_id);
-		jQuery.ajax({
-				url : "<?php echo site_url('VisitFarmer/DLimit');?>",
-				method : "POST",
-				data:'dist_id='+dist_id,
-				success: function(data){
-					jQuery('#limit').html(data);
-					//alert(data);
-				}
-			});
-    });
-});
-</script>
 </body>
 </html>

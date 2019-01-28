@@ -33,7 +33,7 @@
                         <h4 class="mb-0">
                             <span class="count"><?php echo count($editData); ?></span>
                         </h4>
-                        <a href="<?php echo base_url('Product/Listing/'); ?>"><p class="text-light">Product Available</p></a>
+                        <a href="<?php //echo base_url('Product/Listing/'); ?>"><p class="text-light">Product Available</p></a>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
                             <canvas id="widgetChart1"></canvas>
@@ -70,7 +70,7 @@
                         <h4 class="mb-0">
                             <span class="count"><?php echo count($Totalinvoice); ?></span>
                         </h4>
-                        <a href="<?php echo base_url('Billing/InvoiceView/'); ?>"><p class="text-light">Total Invoice</p></a>
+                        <a href="<?php echo base_url('Order/InvoiceView/'); ?>"><p class="text-light">Total Invoice</p></a>
 
                     </div>
 

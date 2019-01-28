@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/scss/style.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.timepicker.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/calendar/fullcalendar.css'); ?>">
     <link href="<?php echo base_url('assets/css/lib/vector-map/jqvmap.min.css'); ?>" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -56,12 +57,12 @@
                           <li><a href="<?php echo base_url('NewMeeting/Listing'); ?>"><i class="menu-icon fa fa-users"></i>View Meeting</a></li>
                           <li><a href="<?php echo base_url('VisitDealer/'); ?>"> <i class="menu-icon fa fa-bus"></i>Visit Dealer</a></li>
                           <li><a href="<?php echo base_url('VisitFarmer/'); ?>"> <i class="menu-icon fa fa-bus"></i>Visit Farmers</a></li>
-                          <li><a href="#"> <i class="menu-icon fa fa-group"></i>Follow up Meeting</a></li>
+                          <li><a href="<?php echo base_url('FollowupMeeting/'); ?>"> <i class="menu-icon fa fa-group"></i>Follow up Meeting</a></li>
                         <!--</ul>-->
 					          <li><a href="<?php echo base_url('Distributor'); ?>"> <i class="menu-icon fa fa-laptop"></i>Create Distributor</a></li>
                     <li><a href="<?php echo base_url('Distributor/Listing'); ?>"> <i class="menu-icon fa fa-laptop"></i>View Distributor</a></li>
                     <li><a href="<?php echo base_url('Order/'); ?>"> <i class="menu-icon fa fa-laptop"></i>Generate Order</a></li>
-                    <li><a href="#"><i class="menu-icon fa fa-sticky-note"></i>View Invoice</a></li>
+                    <li><a href="<?php echo base_url('Order/InvoiceView'); ?>"><i class="menu-icon fa fa-sticky-note"></i>View Invoice</a></li>
                     <li><a href="<?php echo base_url('Enquiry/'); ?>"> <i class="menu-icon fa fa-envelope"></i>Enquiry</a></li>
                     <li><a href="<?php echo base_url('AdminPanel/logOut'); ?>" class="dropdown-toggle" > <i class="menu-icon fa fa-area-chart"></i>Logout</a></li>
                 </ul>

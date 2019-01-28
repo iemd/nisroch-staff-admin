@@ -49,7 +49,7 @@
                 </div>
                 <div class="card-body card-block">
                    <div class="row form-group">
-                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">OrderID/Date/Time</label></div>
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">OrderID | Date | Time</label></div>
                       <div class="col-12 col-md-3"><input type="text" id="Orderid" name="Orderid" value="<?php echo $OrderID;?>" placeholder="Day" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" placeholder="Date" class="form-control" readonly></div>
                       <div class="col-12 col-md-3"><input type="text" id="Time" name="Time" value="<?php echo date('g:i A'); ?>" placeholder="Time" class="form-control" readonly></div>

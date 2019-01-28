@@ -66,6 +66,15 @@ class DataModel extends CI_Model
 				return $query->result_array();
 
 			}
+			public function StaffTodayInvoiceCount($date,$staff_id)
+				{
+					//$whereArray = array("pay_date"=>$date, "payment_status"=>"Done",'login_id'=>$staff_id);
+					$whereArray = array("pay_date"=>$date,'login_id'=>$staff_id);
+					$query = $this->db->get_where('staff_order_request',$whereArray);
+					//echo $this->db->last_query();
+					return $query->result_array();
+
+				}
 
 		public function todayrevenue($date)
 			{
@@ -126,7 +135,19 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
+			public function StaffTotalInvoiceCount($staff_id)
+				{
+					$this->db->select('*');
 
+					$this->db->from('staff_order_request');
+					$this->db->where('login_id',$staff_id);
+					//$this->db->where('payment_status',"Done");
+					$this->db->order_by("order_id","asc");
+					$query = $this->db->get();
+					//print $this->db->last_query();die;
+					$result = $query->result_array();
+					return $result;
+				}
 
 		public function payment_update($payment, $invoiceId)
 			{
@@ -159,6 +180,20 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
+			public function StaffInvoiceDetails($staff_id)
+				{
+					$this->db->select('*');
+					//$this->db->where('prod_name',$product);
+					//$this->db->where('payment_status','Done');
+					$this->db->where('login_id',$staff_id);
+					$this->db->from('staff_order_request');
+					$this->db->join('staff_distributor', 'staff_distributor.dist_id = staff_order_request.Distributor_id', 'full');
+					//$this->db->order_by("ID","desc");
+					$query = $this->db->get();
+					//print $this->db->last_query();die;
+					$result = $query->result_array();
+					return $result;
+				}
 
 		public function invoiceprintdetails($bill_id)
 			{
@@ -172,7 +207,12 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
-
+		public function StaffFollowupMeetings($staff_id=null)
+		{
+			  $this->db->where('created_by',$staff_id);
+				$result = $this->db->get("staff_meeting")->result();
+				return $result;
+		}
 		public function getData($prod_id=null)
 			{
 				$this->db->select('*');
@@ -350,6 +390,16 @@ class DataModel extends CI_Model
 			{
 				$whereArray = array("meet_id"=>$meet_id);
 				$query = $this->db->delete('staff_meeting',$whereArray);
+				if ($query) {
+					return true;
+				} else {
+					return false;
+					}
+		}
+		public function StaffDeleteEnquiry($enquiry_id)
+			{
+				$whereArray = array("enquiry_id"=>$enquiry_id);
+				$query = $this->db->delete('staff_enquiry',$whereArray);
 				if ($query) {
 					return true;
 				} else {
@@ -537,6 +587,17 @@ class DataModel extends CI_Model
 					$result = $query->result_array();
 					return $result;
 				}
+				public function StaffEnquiryDetails($staff_id=null)
+					{
+						$this->db->select('*');
+						$this->db->where('created_by', $staff_id);
+						$this->db->from('staff_enquiry');
+						$this->db->order_by("date","desc");
+						$query = $this->db->get();
+						//print $this->db->last_query();die;
+						$result = $query->result_array();
+						return $result;
+					}
 			public function ViewOrderStatus($staff_id=null)
 			{
 						$this->db->select('*');

@@ -43,6 +43,8 @@ public function NewOrder()
 		$data['Distributor_id'] = $this->input->post('Distributor');
 		$data['login_id'] = $this->session->userdata['ID'];
 		$data['ProductType'] = $this->input->post('ProductType');
+		$data['pay_date'] = date('Y-m-d');
+		$data['pay_time'] = date('H:i:s');
 		//$data['transportType'] = $this->db->escape_str(trim($this->input->post('transportType')));
 		if($data['ProductType'] == 'NPP'){
 		$data['current_limit']	= $this->input->post('nppLimit');
@@ -120,14 +122,19 @@ public function NewOrder()
 				}
 		}
  }
-	public function Listing()
-	{
-		$this->load->model('DataModel');
-		$data['visitdealerlist'] = $this->DataModel->meetinglist();
-		//print_r($data['meetinglist']);die;
-		$this->load->view('common/header');
-		$this->load->view('visitdealerList', $data);
-	}
+ public function InvoiceView()
+ {
+	 $this->load->model('DataModel');
+	 //$data['getCategory'] = $this->DataModel->getCategory();
+	 $staff_id = $this->session->userdata('ID');
+	 $data['editData'] = $this->DataModel->getData();
+	 $data['invoice_details'] = $this->DataModel->StaffInvoiceDetails($staff_id);
+	 //print_r($data['invoice_details']);die;
+
+	 $this->load->view('common/header');
+	 $this->load->view('invoice_view', $data);
+
+ }
 	public function DLimit()
   {
 		$this->load->model('DataModel');

@@ -23,8 +23,8 @@ class Enquiry extends CI_Controller {
 		$this->load->model('DataModel');
 		$this->load->view('common/header');
 		$staff_id = $this->session->userdata('ID');
-		//$data['EnquiryDetails'] = $this->DataModel->EnquiryDetails($staff_id);
-		$this->load->view('enquiry');
+		$data['EnquiryDetails'] = $this->DataModel->StaffEnquiryDetails($staff_id);
+		$this->load->view('enquiry',$data);
 	}
 
 	public function SendEnquiry()
@@ -70,53 +70,14 @@ echo "<div class='col col-md-3'><label for='text-input' class='form-control-labe
 
 }
 
-	/*public function editMeeting($meet_id=null)
-	{
-		$this->load->model('DataModel');
-		$data['editmeeting'] = $this->DataModel->editmeeting($meet_id);
-		//print_r($data['editmeeting']);die;
-		$this->load->view('common/header');
-		$this->load->view('editmeeting', $data);
+public function delete($enquiry_id=null)
+{
+	$this->load->model('DataModel');
+	$delete = $this->DataModel->StaffDeleteEnquiry($enquiry_id);
+	if($delete){
+		$message = $this->session->set_flashdata('message', 'Deleted successfully !');
+		redirect(base_url('Enquiry/'), 'refresh');
 	}
-
-	public function UpdateMeeting($dist_id=null)
-	{
-		$this->load->model('DataModel');
-		$data['name'] = $this->input->post('name');
-		$data['bcode'] = $this->input->post('BuyerCode');
-		$data['State'] = $this->input->post('State');
-		$data['City'] = $this->input->post('City');
-		$data['Pincode'] = $this->input->post('Pincode');
-		$data['DAddress'] = $this->input->post('DAddress');
-		$data['email'] = $this->input->post('email');
-		$data['number'] = $this->input->post('number');
-		$data['gst'] = $this->input->post('gst');
-		$data['pos'] = $this->input->post('pos');
-		$data['Destination'] = $this->input->post('Destination');
-		$data['pnumber'] = $this->input->post('pnumber');
-		$data['npp'] = $this->input->post('npp');
-		$data['nbp'] = $this->input->post('nbp');
-		$data['nppLimit'] = $this->input->post('nppLimit');
-		$data['nbpLimit'] = $this->input->post('nbpLimit');
-		$data['currentNpp'] = $this->input->post('nppLimit');
-		$data['currentNbp'] = $this->input->post('nbpLimit');
-
-		$update = $this->DataModel->updatemeeting($meet_id, $data);
-		if($update){
-			$message = $this->session->set_flashdata('message', 'Updated successfully !');
-			redirect(base_url('NewMeeting/Listing'), 'refresh');
-		}
-	}
-
-
-	public function deleteMeeting($dist_id=null)
-	{
-		$this->load->model('DataModel');
-		$deleteMeeting = $this->DataModel->deleteMeeting($meet_id);
-		if($deleteMeeting){
-			$message = $this->session->set_flashdata('message', 'Deleted successfully !');
-			redirect(base_url('NewMeeting/Listing'), 'refresh');
-		}
-	}*/
+}
 
 }

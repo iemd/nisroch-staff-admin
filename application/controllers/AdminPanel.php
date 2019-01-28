@@ -15,12 +15,13 @@ class AdminPanel extends CI_Controller {
 	public function Dasboard()
 	{
 		$this->load->model('DataModel');
+		$staff_id = $this->session->userdata('ID');
 		$date = date('y-m-d');
 		$data['editData'] = $this->DataModel->getData();
-		$data['distributorlist'] = $this->DataModel->distributorlist();
+		$data['distributorlist'] = $this->DataModel->StaffDistributorlist($staff_id);
 		$data['distcount'] = count($data['distributorlist']);
-		$data['invoice'] = $this->DataModel->todayinvoicecount($date);
-		$data['Totalinvoice'] = $this->DataModel->totalinvoicecount();
+		$data['invoice'] = $this->DataModel->StaffTodayInvoiceCount($date,$staff_id);
+		$data['Totalinvoice'] = $this->DataModel->StaffTotalInvoiceCount($staff_id);
 		$data['todayrevenue'] = $this->DataModel->todayrevenue($date);
 		//print_r($data['editData']);die;
 		$this->load->view('common/header');
