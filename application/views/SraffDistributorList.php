@@ -37,7 +37,7 @@
             <td><?php if($row['status'] == 1): ?>
               <button name="approve" class="btn btn-success btn-sm" id="approve">Approved</button>
             <?php else: ?>
-              <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
+              <button name="reject" class="btn btn-danger btn-sm" id="cancel">Pending</button>
             <?php endif; ?>
             </td>
                       <td>  <a href="<?php //echo base_url('Inventory/AllLedgerPrint/'.$row['dist_id']); ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>&nbsp;&nbsp;

@@ -134,9 +134,8 @@
                         <th>Sl.No.</th>
                         <th>Order ID</th>
                          <th>Date</th>
+                         <th>Status</th>
                         <th>View Invoice</th>
-                        <th>Order Status</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -146,13 +145,20 @@
                         <td><?php echo $row['order_id']; ?></td>
                         <td><?php echo $row['Invoice']; ?></td>
                         <td><?php echo $row['date']; ?></td>
-                        <td>View Invoice</td>
+
                         <td><?php if($row['order_status'] == 1): ?>
                           <button name="approve" class="btn btn-success btn-sm" id="approve">Approved</button>
                         <?php else: ?>
-                          <button name="reject" class="btn btn-danger btn-sm" id="cancel">Not Approved</button>
+                          <button name="reject" class="btn btn-danger btn-sm" id="cancel">Pending</button>
                         <?php endif; ?>
                         </td>
+                          <td>
+                            <?php if($row['order_status'] == 1): ?>
+                              <a href="<?php //echo base_url('Order/InvoiceView/').$row['order_id']; ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>
+                              <?php else: ?>
+                              <a href="<?php //echo base_url('Order/delete/').$row['order_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
+                              <?php endif; ?>
+                          </td>
                       </tr>
           <?php } ?>
 
