@@ -143,7 +143,9 @@
                       <tr>
             <?php //print_r($row);die; ?>
                         <td><?php echo $row['order_id']; ?></td>
-                        <td><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#orderDetails"><?php echo $row['Invoice']; ?></button></td>
+                        <td>
+                          <button type="button" value="<?php echo $row['order_id']; ?>" class="btn btn-sm order-id" data-toggle="modal" data-target="#orderPopup"><?php echo $row['Invoice']; ?></button>
+                        </td>
                         <td><?php echo $row['date']; ?></td>
 
                         <td><?php if($row['order_status'] == 1): ?>
@@ -173,7 +175,7 @@
             </div><!-- .animated -->
         </div>
         <!-- Modal -->
-      <div class="content mt-6 modal fade" id="orderDetails" role="dialog">
+      <div class="content mt-6 modal fade" id="orderPopup" role="dialog">
           <div class="animated fadeIn modal-dialog modal-md">
           <div class="row">
           <div class="col-lg-12">
@@ -182,51 +184,8 @@
                 <strong class="modal-title">ORDER DETAILS</strong>
                 <!--<h4 style="color:green;"><?php //echo $this->session->flashdata('message'); ?></h4>-->
               </div>
-              <div class="card-body card-block modal-body">
-                <div class="row form-group">
-                   <div class="col col-md-4"><label for="text-input" class=" form-control-label">Date</label></div>
-                   <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="YYYY-MM-DD" placeholder="Date" class="form-control" readonly></div>
+              <div class="card-body card-block modal-body" id="orderDetails">
 
-                 </div>
-                 <div class="row form-group">
-                    <div class="col col-md-4"><label for="text-input" class=" form-control-label">Time</label></div>
-                    <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="HH:MM:SS" placeholder="Time" class="form-control" readonly></div>
-
-                  </div>
-                 <div class="row form-group">
-                    <div class="col col-md-4"><label for="text-input" class=" form-control-label">Distributor Name</label></div>
-                    <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Distributor Name" class="form-control" readonly></div>
-
-                  </div>
-                  <div class="row form-group">
-                     <div class="col col-md-4"><label for="text-input" class=" form-control-label">Mobile No.</label></div>
-                     <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Mobile No." class="form-control" readonly></div>
-
-                   </div>
-                   <div class="row form-group">
-                      <div class="col col-md-4"><label for="text-input" class=" form-control-label">Product Type</label></div>
-                      <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Product Type" class="form-control" readonly></div>
-
-                    </div>
-      <div class="table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                          <th>Product Name</th>
-                          <th>Qty</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                <tr class="success">
-                <td>JHATKA 505 (1LTRX10)</td>
-                  <td>300</td>
-                </tr>
-                </tbody>
-              </table >
-          </div>
-                <div class="card-footer modal-footer" style="background-color:#95ecd4;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
               </div>
           </div>
     </div>
@@ -312,6 +271,23 @@ jQuery(document).ready(function(){
 					//alert(data);
 				}
 			});
+    });
+});
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    jQuery("button.order-id").click(function(){
+        var order_id = jQuery(this).val();
+		    //alert(order_id);
+        jQuery.ajax({
+            url : "<?php echo site_url('Order/getOrderDetails');?>",
+            method : "POST",
+            data:'order_id='+order_id,
+            success: function(data){
+              jQuery('#orderDetails').html(data);
+              //alert(data);
+            }
+          });
     });
 });
 </script>

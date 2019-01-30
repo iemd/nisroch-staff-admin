@@ -156,6 +156,70 @@ public function NewOrder()
 	}
 
 }
+public function getOrderDetails()
+{
+	$this->load->model('DataModel');
+	$staff_id = $this->session->userdata('ID');
+	$order_id = $this->input->post('order_id');
+	$OrderDetails="";
+	if(!empty($order_id)){
+		$orderdetails = $this->DataModel->getOrderDetailStaff($staff_id,$order_id);
+		$cartItems = $this->DataModel->getCartStaff($staff_id,$order_id);
+		foreach($orderdetails as $order){
+			$paydate = $order['pay_date'];
+			$paytime = $order['pay_time'];
+			$distributorName = $order['name'];
+			$mobileno = $order['number'];
+			$ProductType = $order['ProductType'];
+		}
+		$OrderDetails = "<div class='row form-group'>
+		 <div class='col col-md-4'><label for='text-input' class='form-control-label'>Date</label></div>
+		 <div class='col-12 col-md-8'><input type='text' id='ordDtae' name='ordDtae' value='$paydate' placeholder='Date' class='form-control' readonly></div>
+	 </div>
+	 <div class='row form-group'>
+			<div class='col col-md-4'><label for='text-input' class='form-control-label'>Time</label></div>
+			<div class='col-12 col-md-8'><input type='text' id='ordTime' name='ordTime' value='$paytime' placeholder='Time' class='form-control' readonly></div>
+		</div>
+	 <div class='row form-group'>
+			<div class='col col-md-4'><label for='text-input' class='form-control-label'>Distributor Name</label></div>
+			<div class='col-12 col-md-8'><input type='text' id='ordDistributor' name='ordDistributor' value='$distributorName' placeholder='Distributor Name' class='form-control' readonly></div>
+		</div>
+		<div class='row form-group'>
+			 <div class='col col-md-4'><label for='text-input' class='form-control-label'>Mobile No.</label></div>
+			 <div class='col-12 col-md-8'><input type='text' id='ordContact' name='ordContact' value='$mobileno' placeholder='Mobile No.' class='form-control' readonly></div>
+		 </div>
+		 <div class='row form-group'>
+				<div class='col col-md-4'><label for='text-input' class='form-control-label'>Product Type</label></div>
+				<div class='col-12 col-md-8'><input type='text' id='ordType' name='ordType' value='$ProductType' placeholder='Product Type' class='form-control' readonly></div>
+		</div>
+		<div class='table-responsive'>
+		<table id='example1' class='table table-bordered table-striped'>
+					<thead>
+						<tr>
+						<th>Product Name</th>
+						<th>Qty</th>
+						</tr>
+			</thead>
+			<tbody>";
+			foreach($cartItems as $row){
+				$prod_name = $row['prod_name'];
+				$quantity = $row['quantity'];
+		  	$OrderDetails .= "<tr class='success'>
+				<td>$prod_name</td>
+					<td>$quantity</td>
+				</tr>";
+			}
+	$OrderDetails .= "</tbody>
+</table >
+</div>
+<div class='card-footer modal-footer' style='background-color:#95ecd4;'>
+		<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+</div>";
+	echo $OrderDetails;
+	}else{
+		echo $OrderDetails;
+	}
+}
 
 	public function getProductList()
 	{
