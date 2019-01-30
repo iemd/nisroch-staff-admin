@@ -932,10 +932,10 @@ class DataModel extends CI_Model
 				return $result;
 			}
 
-		public function deletecartbill($bill_id)
+		public function deletecartbill($order_id)
 			{
-				$whereArray = array("invoiceId"=>$bill_id);
-				$query = $this->db->delete('addcart',$whereArray);
+				$whereArray = array("invoiceId"=>$order_id);
+				$query = $this->db->delete('staff_addcart',$whereArray);
 				if ($query) {
 					return true;
 				} else {
@@ -943,10 +943,10 @@ class DataModel extends CI_Model
 					}
 			}
 
-		public function deletebill($bill_id)
+		public function deletebill($order_id)
 			{
-				$whereArray = array("bill_id"=>$bill_id);
-				$query = $this->db->delete('billing',$whereArray);
+				$whereArray = array("order_id"=>$order_id);
+				$query = $this->db->delete('staff_order_request',$whereArray);
 				if ($query) {
 					return true;
 				} else {

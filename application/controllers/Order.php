@@ -181,4 +181,14 @@ public function NewOrder()
 			}
 			echo 	$options;
 	}
+	public function DeleteOrder($order_id=null)
+	{
+		$this->load->model('DataModel');
+		$deletecartbill = $this->DataModel->deletecartbill($order_id);
+		$deletebill = $this->DataModel->deletebill($order_id);
+		if($deletebill){
+			$message = $this->session->set_flashdata('message', 'Order Deleted');
+			redirect(base_url('Order/'), 'refresh', $message);
+		}
+	}
 }

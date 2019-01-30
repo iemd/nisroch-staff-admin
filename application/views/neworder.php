@@ -143,7 +143,7 @@
                       <tr>
             <?php //print_r($row);die; ?>
                         <td><?php echo $row['order_id']; ?></td>
-                        <td><?php echo $row['Invoice']; ?></td>
+                        <td><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#orderDetails"><?php echo $row['Invoice']; ?></button></td>
                         <td><?php echo $row['date']; ?></td>
 
                         <td><?php if($row['order_status'] == 1): ?>
@@ -156,7 +156,7 @@
                             <?php if($row['order_status'] == 1): ?>
                               <a href="<?php //echo base_url('Order/InvoiceView/').$row['order_id']; ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>
                               <?php else: ?>
-                              <a href="<?php //echo base_url('Order/delete/').$row['order_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
+                              <a href="<?php echo base_url('Order/DeleteOrder/').$row['order_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
                               <?php endif; ?>
                           </td>
                       </tr>
@@ -172,7 +172,64 @@
                 </div>
             </div><!-- .animated -->
         </div>
+        <!-- Modal -->
+      <div class="content mt-6 modal fade" id="orderDetails" role="dialog">
+          <div class="animated fadeIn modal-dialog modal-md">
+          <div class="row">
+          <div class="col-lg-12">
+            <div class="card modal-content" style="background-color:#95ecd4;">
+              <div class="card-header modal-header">
+                <strong class="modal-title">ORDER DETAILS</strong>
+                <!--<h4 style="color:green;"><?php //echo $this->session->flashdata('message'); ?></h4>-->
+              </div>
+              <div class="card-body card-block modal-body">
+                <div class="row form-group">
+                   <div class="col col-md-4"><label for="text-input" class=" form-control-label">Date</label></div>
+                   <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="YYYY-MM-DD" placeholder="Date" class="form-control" readonly></div>
 
+                 </div>
+                 <div class="row form-group">
+                    <div class="col col-md-4"><label for="text-input" class=" form-control-label">Time</label></div>
+                    <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="HH:MM:SS" placeholder="Time" class="form-control" readonly></div>
+
+                  </div>
+                 <div class="row form-group">
+                    <div class="col col-md-4"><label for="text-input" class=" form-control-label">Distributor Name</label></div>
+                    <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Distributor Name" class="form-control" readonly></div>
+
+                  </div>
+                  <div class="row form-group">
+                     <div class="col col-md-4"><label for="text-input" class=" form-control-label">Mobile No.</label></div>
+                     <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Mobile No." class="form-control" readonly></div>
+
+                   </div>
+                   <div class="row form-group">
+                      <div class="col col-md-4"><label for="text-input" class=" form-control-label">Product Type</label></div>
+                      <div class="col-12 col-md-8"><input type="text" id="Orderid" name="Orderid" value="" placeholder="Product Type" class="form-control" readonly></div>
+
+                    </div>
+      <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                          <th>Product Name</th>
+                          <th>Qty</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                <tr class="success">
+                <td>JHATKA 505 (1LTRX10)</td>
+                  <td>300</td>
+                </tr>
+                </tbody>
+              </table >
+          </div>
+                <div class="card-footer modal-footer" style="background-color:#95ecd4;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+          </div>
+    </div>
 <?php } else { ?>
 	 <?php redirect(base_url('AdminPanel')); ?>
 <?php } ?>
