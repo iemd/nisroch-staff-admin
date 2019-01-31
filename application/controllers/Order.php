@@ -212,7 +212,7 @@ public function getOrderDetails()
 	$OrderDetails .= "</tbody>
 </table >
 </div>
-<div class='card-footer modal-footer' style='background-color:#95ecd4;'>
+<div class='card-footer' style='background-color:#95ecd4;text-align: center;'>
 		<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
 </div>";
 	echo $OrderDetails;
