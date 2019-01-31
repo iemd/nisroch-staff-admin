@@ -40,7 +40,7 @@
               <button name="reject" class="btn btn-danger btn-sm" id="cancel">Pending</button>
             <?php endif; ?>
             </td>
-                      <td>  <a href="<?php //echo base_url('Inventory/AllLedgerPrint/'.$row['dist_id']); ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>&nbsp;&nbsp;
+                      <td>                      
                         <a href="<?php echo base_url('Distributor/edit/').$row['dist_id']; ?>"><i class="fa fa-edit" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;
                         <a href="<?php echo base_url('Distributor/delete/').$row['dist_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a></td>
                       </tr>
