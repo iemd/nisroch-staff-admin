@@ -121,13 +121,14 @@
             <div class="animated fadeIn">
                 <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <div class="card" style="background-color:#95ecd4;">
                         <div class="card-header">
                             <strong class="card-title">ORDER STATUS</strong>
                         </div>
             <?php //echo $this->session->flashdata('message');  ?>
-                        <div class="card-body">
+                        <div class="card-body card-block">
+                          <div class="table-responsive">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
@@ -166,6 +167,7 @@
 
                     </tbody>
                   </table>
+                </div>
                         </div>
                     </div>
                 </div>
