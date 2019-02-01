@@ -42,19 +42,23 @@
     <script src="<?php echo base_url('assets/js/lib/calendar/fullcalendar.min.js'); ?>"></script>
     <script type="text/javascript">
     <?php
+    if(!empty($meetings)){
       foreach ($meetings as $key => $value) {
           $data[$key]['title'] = $value->concern;
           $data[$key]['start'] = $value->followup_date;
           $data[$key]['end'] = $value->followup_date;
           $data[$key]['backgroundColor'] = "#00a65a";
       }
+    }else{
+      $data[][]='';
+    }
      ?>
     var events = <?php echo json_encode($data) ?>;
 
-    var date = new Date()
+    var date = new Date();
     var d    = date.getDate(),
         m    = date.getMonth(),
-        y    = date.getFullYear()
+        y    = date.getFullYear();
 
     jQuery('#calendar').fullCalendar({
 
