@@ -901,8 +901,8 @@ class DataModel extends CI_Model
 
 		public function authenti($username,$password)
 			{
-				$array = array("username"=>$username,"password"=>md5($password));
-				$query = $this->db->get_where('admin',$array);
+				$array = array("username"=>$username,"password"=>md5($password),"type"=>'Staff');
+				$query = $this->db->get_where('staff',$array);
 				//echo $this->db->last_query();
 
 				$count = $query->num_rows();
