@@ -187,7 +187,7 @@ class DataModel extends CI_Model
 					//$this->db->where('payment_status','Done');
 					$this->db->where('login_id',$staff_id);
 					$this->db->from('staff_order_request');
-					$this->db->join('staff_distributor', 'staff_distributor.dist_id = staff_order_request.Distributor_id', 'full');
+					$this->db->join('distributor', 'distributor.dist_id = staff_order_request.Distributor_id', 'full');
 					//$this->db->order_by("ID","desc");
 					$query = $this->db->get();
 					//print $this->db->last_query();die;
@@ -328,7 +328,7 @@ class DataModel extends CI_Model
 			{
 				$this->db->select('*');
 				$this->db->where('created_by',$staff_id);
-				$this->db->from('staff_distributor');
+				$this->db->from('distributor');
 				$query = $this->db->get();
 				$result = $query->result_array();
 				return $result;
@@ -338,7 +338,7 @@ class DataModel extends CI_Model
 					$this->db->select('*');
 					$this->db->where('created_by',$staff_id);
 					$this->db->where('status',1);
-					$this->db->from('staff_distributor');
+					$this->db->from('distributor');
 					$query = $this->db->get();
 					$result = $query->result_array();
 					return $result;
@@ -460,7 +460,7 @@ class DataModel extends CI_Model
 	 {
 				$this->db->select('*');
 				$this->db->where('dist_id',$dist_id);
-				$this->db->from('staff_distributor');
+				$this->db->from('distributor');
 				$query = $this->db->get();
 				$result = $query->result_array();
 				return $result;
@@ -468,13 +468,13 @@ class DataModel extends CI_Model
  public function StaffUpdateDistributor($dist_id, $data)
  {
 			 $this->db->where('dist_id', $dist_id);
-			 return $this->db->update('staff_distributor', $data);
+			 return $this->db->update('distributor', $data);
 
  }
  public function StaffDeleteDistributor($dist_id)
 	 {
 		 $whereArray = array("dist_id"=>$dist_id);
-		 $query = $this->db->delete('staff_distributor',$whereArray);
+		 $query = $this->db->delete('distributor',$whereArray);
 		 if ($query) {
 			 return true;
 		 } else {
@@ -660,7 +660,7 @@ class DataModel extends CI_Model
 				{
 					$this->db->select('*');
 					$this->db->where('dist_id',$dist_id);
-					$this->db->from('staff_distributor');
+					$this->db->from('distributor');
 					$query = $this->db->get();
 					$result = $query->result_array();
 					return $result;

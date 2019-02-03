@@ -39,7 +39,7 @@ class Distributor extends CI_Controller {
 		$data['pnumber'] = $this->input->post('pnumber');
 		$data['status'] = 0;
 		$data['created_by'] = $this->session->userdata('ID');
-		$insert =  $this->db->insert('staff_distributor',$data);
+		$insert =  $this->db->insert('distributor',$data);
 		if($insert)
 		{
 			$message = $this->session->set_flashdata('message', '1 Distributor successfully added');
