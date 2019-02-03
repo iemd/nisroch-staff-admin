@@ -54,11 +54,13 @@ public function NewOrder()
 		}
 		$data['latitude'] = $this->input->post('latitude');
 		$data['longitude'] = $this->input->post('longitude');
+		$data['order_status'] = 0;
+		$data['created_by'] = $this->session->userdata['ID'];
 		if(empty($productList)){
 			$message = $this->session->set_flashdata('error', 'Please add atleast 1 product');
 			redirect(base_url('Order/'), 'refresh', $message);
 		}else{
-					$insert =  $this->db->insert('staff_order_request',$data);
+					$insert =  $this->db->insert('billing',$data);
 					$return = $this->db->insert_id();
 					$this->session->set_userdata('invoiceData', $return);
 		    //echo $this->db->last_query();die;
@@ -109,9 +111,9 @@ public function NewOrder()
 							$cart['quantity'] = $Qty[$i];
 							$cart['quantitytype'] = $quantitytype;
 							$cart['base_price'] = $base_price;
-							$cart['created_by'] = $this->session->userdata['ID'];
+							//$cart['created_by'] = $this->session->userdata['ID'];
               //print_r($cart); die;
-							$insert =  $this->db->insert('staff_addcart',$cart);
+							$insert =  $this->db->insert('addcart',$cart);
 							$i++;
 						}
 						if($insert){

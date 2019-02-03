@@ -143,9 +143,9 @@
           <?php foreach($ViewOrderStatus as $row) { ?>
                       <tr>
             <?php //print_r($row);die; ?>
-                        <td><?php echo $row['order_id']; ?></td>
+                        <td><?php echo $row['bill_id']; ?></td>
                         <td>
-                          <button type="button" value="<?php echo $row['order_id']; ?>" class="btn btn-sm order-id" data-toggle="modal" data-target="#orderPopup"><?php echo $row['Invoice']; ?></button>
+                          <button type="button" value="<?php echo $row['bill_id']; ?>" class="btn btn-sm order-id" data-toggle="modal" data-target="#orderPopup"><?php echo $row['Invoice']; ?></button>
                         </td>
                         <td><?php echo $row['date']; ?></td>
 
@@ -159,7 +159,7 @@
                             <?php if($row['order_status'] == 1): ?>
                               <a href="<?php //echo base_url('Order/InvoiceView/').$row['order_id']; ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>
                               <?php else: ?>
-                              <a href="<?php echo base_url('Order/DeleteOrder/').$row['order_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
+                              <a href="<?php echo base_url('Order/DeleteOrder/').$row['bill_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
                               <?php endif; ?>
                           </td>
                       </tr>

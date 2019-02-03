@@ -186,8 +186,8 @@ class DataModel extends CI_Model
 					//$this->db->where('prod_name',$product);
 					//$this->db->where('payment_status','Done');
 					$this->db->where('login_id',$staff_id);
-					$this->db->from('staff_order_request');
-					$this->db->join('distributor', 'distributor.dist_id = staff_order_request.Distributor_id', 'full');
+					$this->db->from('billing');
+					$this->db->join('distributor', 'distributor.dist_id = billing.Distributor_id', 'full');
 					//$this->db->order_by("ID","desc");
 					$query = $this->db->get();
 					//print $this->db->last_query();die;
@@ -601,8 +601,8 @@ class DataModel extends CI_Model
 			public function ViewOrderStatus($staff_id=null)
 			{
 						$this->db->select('*');
-						$this->db->where('login_id', $staff_id);
-						$this->db->from('staff_order_request');
+						$this->db->where('created_by', $staff_id);
+						$this->db->from('billing');
 						$query = $this->db->get();
 						$result = $query->result_array();
 						return $result;
@@ -693,8 +693,8 @@ class DataModel extends CI_Model
 				$this->db->select('*');
 				$this->db->where('created_by',$staff_id);
 				$this->db->where('invoiceId',$orderId);
-				$this->db->from('staff_addcart');
-				$this->db->join('staff_order_request', 'staff_order_request.order_id = staff_addcart.invoiceId');
+				$this->db->from('addcart');
+				$this->db->join('billing', 'billing.bill_id = addcart.invoiceId');
 				$query = $this->db->get();
 				//print $this->db->last_query();die;
 				$result = $query->result_array();
@@ -707,10 +707,11 @@ class DataModel extends CI_Model
 					$this->db->select('*');
 					//$this->db->where('prod_name',$product);
 					//$this->db->where('payment_status','Done');
-					$this->db->where('login_id',$staff_id);
-					$this->db->where('order_id',$orderId);
-					$this->db->from('staff_order_request');
-					$this->db->join('staff_distributor', 'staff_distributor.dist_id = staff_order_request.Distributor_id', 'full');
+
+					$this->db->where('bill_id',$orderId);
+					$this->db->where('billing.created_by',$staff_id);
+					$this->db->from('billing');
+					$this->db->join('distributor', 'distributor.dist_id = billing.Distributor_id', 'full');
 					//$this->db->order_by("ID","desc");
 					$query = $this->db->get();
 					//print $this->db->last_query();die;
@@ -951,7 +952,7 @@ class DataModel extends CI_Model
 		public function deletecartbill($order_id)
 			{
 				$whereArray = array("invoiceId"=>$order_id);
-				$query = $this->db->delete('staff_addcart',$whereArray);
+				$query = $this->db->delete('addcart',$whereArray);
 				if ($query) {
 					return true;
 				} else {
@@ -961,8 +962,8 @@ class DataModel extends CI_Model
 
 		public function deletebill($order_id)
 			{
-				$whereArray = array("order_id"=>$order_id);
-				$query = $this->db->delete('staff_order_request',$whereArray);
+				$whereArray = array("bill_id"=>$order_id);
+				$query = $this->db->delete('billing',$whereArray);
 				if ($query) {
 					return true;
 				} else {
