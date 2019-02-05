@@ -51,7 +51,7 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Follow Up</label></div>
                         <div class="col col-md-3"><input type="text" id="followuptime" name="followuptime" value="<?php echo $row['followup_time']; ?>" placeholder="HH:MM" class="form-control"></div>
-                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" value="<?php echo $row['followup_date']; ?>" placeholder="DD-MM-YYYY" class="form-control"></div>
+                        <div class="col col-md-3"><input type="text" id="followupdate" name="followupdate" value="<?php echo $row['followup_date']; ?>" placeholder="YYYY-MM-DD" class="form-control"></div>
                         <div class="col col-md-3">&nbsp;</div>
                         <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
                         <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
@@ -110,7 +110,7 @@
     </script>
     <script>
     jQuery( function() {
-      jQuery( "#followupdate" ).datepicker( { dateFormat: 'dd-mm-yy' });
+      jQuery( "#followupdate" ).datepicker( { dateFormat: 'yy-mm-dd' });
     } );
 </script>
 
