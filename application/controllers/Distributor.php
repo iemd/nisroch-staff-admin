@@ -65,7 +65,7 @@ class Distributor extends CI_Controller {
 		$data['editdistributor'] = $this->DataModel->StaffEditDistributor($dist_id);
 		//print_r($data['editdistributor']);die;
 		$this->load->view('common/header');
-		$this->load->view('editDistributor', $data);
+		$this->load->view('editdistributor', $data);
 	}
 	public function update($dist_id=null)
 	{
