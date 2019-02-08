@@ -4,7 +4,7 @@
         <div class="content mt-6">
             <div class="animated fadeIn">
             <div class="row">
-            <form action="<?php echo base_url('newmeeting/createmeeting/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo base_url('NewMeeting/CreateMeeting/'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-lg-12">
               <div class="card" style="background-color:#95ecd4;">
                 <div class="card-header">
