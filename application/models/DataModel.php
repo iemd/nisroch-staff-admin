@@ -323,23 +323,36 @@ class DataModel extends CI_Model
 				$result = $query->result_array();
 				return $result;
 			}
-
-		public function StaffDistributorlist($staff_id=null)
+			public function StaffAllocateDistributor($staff_id=null, $dist_id=null)
+			{
+				if(!empty($staff_id) && !empty($dist_id)){
+					$data['staffid'] = $staff_id;
+					$data['distid'] = $dist_id;
+					return $this->db->insert('staff_distributor',$data);
+				}else{
+					return false;
+				}
+			}
+		 public function StaffDistributorlist($staff_id=null)
 			{
 				$this->db->select('*');
-				$this->db->where('created_by',$staff_id);
-				$this->db->from('distributor');
+				$this->db->where('staff_distributor.staffid',$staff_id);
+				$this->db->from('staff_distributor');
+				$this->db->join('distributor', 'staff_distributor.distid = distributor.dist_id');
 				$query = $this->db->get();
+				//print $this->db->last_query();die;
 				$result = $query->result_array();
 				return $result;
 			}
 			public function StaffApprovedDistributorlist($staff_id=null)
 				{
 					$this->db->select('*');
-					$this->db->where('created_by',$staff_id);
-					$this->db->where('status',1);
-					$this->db->from('distributor');
+					$this->db->where('staff_distributor.staffid',$staff_id);
+					$this->db->where('distributor.status',1);
+					$this->db->from('staff_distributor');
+					$this->db->join('distributor', 'staff_distributor.distid = distributor.dist_id');
 					$query = $this->db->get();
+					//print $this->db->last_query();die;
 					$result = $query->result_array();
 					return $result;
 				}

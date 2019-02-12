@@ -26,6 +26,7 @@ class Distributor extends CI_Controller {
 
 	public function CreateDistibutor()
 	{
+		$this->load->model('DataModel');
 		$data['name'] = $this->input->post('name');
 		$data['State'] = $this->input->post('State');
 		$data['City'] = $this->input->post('City');
@@ -40,13 +41,17 @@ class Distributor extends CI_Controller {
 		$data['status'] = 0;
 		$data['created_by'] = $this->session->userdata('ID');
 		$insert =  $this->db->insert('distributor',$data);
+		$insert_id = $this->db->insert_id();
 		if($insert)
 		{
-			$message = $this->session->set_flashdata('message', '1 Distributor successfully added');
-			redirect(base_url('Distributor/'), 'refresh', $message);
-
+			$dist_id = $insert_id;
+			$staff_id = $data['created_by'];
+			$allocated = $this->DataModel->StaffAllocateDistributor($staff_id,$dist_id);
+			if($allocated){
+				$message = $this->session->set_flashdata('message', '1 Distributor successfully added');
+				redirect(base_url('Distributor/'), 'refresh', $message);
+			}
 		}
-
 	}
 
 	public function Listing()
