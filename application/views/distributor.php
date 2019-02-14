@@ -43,6 +43,8 @@
                         <div class="col-12 col-md-3"><input type="text" id="pos" name="pos" placeholder="Place of Supply" class="form-control"></div>
 							          <div class="col-12 col-md-3"><input type="text" id="Destination" name="Destination" placeholder="Enter Destination" class="form-control"></div>
 							          <div class="col-12 col-md-3"><input type="text" id="pnumber" name="pnumber" placeholder="Enter PL Number" class="form-control"></div>
+                        <div class="col col-md-3"><input type="hidden" id="latitude" name="latitude" value="" placeholder="Latitude" class="form-control"></div>
+                        <div class="col col-md-3"><input type="hidden" id="longitude" name="longitude" value="" placeholder="Longitude" class="form-control"></div>
                     </div>
 						  <div class="card-footer" style="background-color:#95ecd4;">
 								<button type="submit" class="btn btn-primary btn-sm">
@@ -67,7 +69,27 @@
     <script src="<?php echo base_url('assets/js/popper.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/plugins.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+    <script>
+        var lat = document.getElementById("latitude");
+        var lng = document.getElementById("longitude");
 
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            lat.value = 0; //Geolocation is not supported by this browser.
+            lng.value = 0; //Geolocation is not supported by this browser.
+          }
+        }
+
+        function showPosition(position) {
+          lat.value = position.coords.latitude;
+          lng.value = position.coords.longitude;
+        }
+        jQuery(function($){
+          getLocation();
+        });
+    </script>
 
 </body>
 </html>

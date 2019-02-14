@@ -38,6 +38,8 @@ class Distributor extends CI_Controller {
 		$data['pos'] = $this->input->post('pos');
 		$data['Destination'] = $this->input->post('Destination');
 		$data['pnumber'] = $this->input->post('pnumber');
+		$data['latitude'] = $this->input->post('latitude');
+		$data['longitude'] = $this->input->post('longitude');
 		$data['status'] = 0;
 		$data['created_by'] = $this->session->userdata('ID');
 		$insert =  $this->db->insert('distributor',$data);
@@ -86,6 +88,8 @@ class Distributor extends CI_Controller {
 		$data['pos'] = $this->input->post('pos');
 		$data['Destination'] = $this->input->post('Destination');
 		$data['pnumber'] = $this->input->post('pnumber');
+		$data['latitude'] = $this->input->post('latitude');
+		$data['longitude'] = $this->input->post('longitude');
 		$data['status'] = 0;
 		$data['created_by'] = $this->session->userdata('ID');
 		$update = $this->DataModel->StaffUpdateDistributor($dist_id, $data);
