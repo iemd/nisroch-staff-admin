@@ -157,7 +157,7 @@
                         </td>
                           <td>
                             <?php if($row['order_status'] == 1): ?>
-                              <a href="<?php //echo base_url('Order/InvoiceView/').$row['order_id']; ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>
+                              <a href="<?php echo base_url('Order/InvoicePrint/').$row['bill_id']; ?>"><i class="fa fa-eye" style="font-size:24px;"></i></a>
                               <?php else: ?>
                               <a href="<?php echo base_url('Order/DeleteOrder/').$row['bill_id']; ?>"><i class="fa fa-trash" style="font-size:24px;color:red"></i></a>
                               <?php endif; ?>

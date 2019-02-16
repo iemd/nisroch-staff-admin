@@ -158,6 +158,27 @@ public function NewOrder()
 	}
 
 }
+public function InvoicePrint($bill_id=null)
+{
+	$this->load->helper('num_helper');
+	$insert['invoiceId'] = $this->session->userdata('invoiceData');
+	$invoiceId = $insert['invoiceId'];
+	$this->load->model('DataModel');
+	//$data['getCategory'] = $this->DataModel->getCategory();
+	$data['editData'] = $this->DataModel->getData();
+	$data['invoice_details'] = $this->DataModel->invoiceprintdetails($bill_id);
+
+	$data['getcart'] = $this->DataModel->getcart($bill_id);
+	foreach($data['invoice_details'] as $row){
+
+	}
+	$login_id = $row['login_id'];
+	$data['adminprofile'] = $this->DataModel->adminprofile($login_id);
+	//print_r($data['invoice_details']);die;
+	//$this->load->view('common/header');
+	$this->load->view('invoice', $data);
+
+}
 public function getOrderDetails()
 {
 	$this->load->model('DataModel');

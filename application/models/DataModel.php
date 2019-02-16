@@ -700,7 +700,19 @@ class DataModel extends CI_Model
 
 				return $result;
 			}
+			public function getcart($invoiceId=null)
+				{
+					$this->db->select('*');
+					$this->db->where('invoiceId',$invoiceId);
+					$this->db->from('addcart');
+					$this->db->join('billing', 'billing.bill_id = addcart.invoiceId');
+					$query = $this->db->get();
+					//print $this->db->last_query();die;
+					$result = $query->result_array();
 
+
+					return $result;
+				}
 		public function getCartStaff($staff_id, $orderId)
 			{
 				$this->db->select('*');
